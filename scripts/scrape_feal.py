@@ -724,9 +724,9 @@ def normalize_rich_text(text: str) -> str:
     """
     Beautify Markdown rich text: blank lines after headings and between paragraphs.
 
-    Note: Figma Sites rich text strips empty/NBSP lines and does not interpret HTML,
-    so vertical gaps before headings must also be set via the bound text style
-    (paragraph spacing / space before heading) in Figma.
+    Figma Sites CMS beta does not support paragraph spacing on rich text styles.
+    Soft/hard line breaks (Shift+Enter in the editor) are the practical workaround;
+    in Markdown that is two trailing spaces before a newline.
     """
     if not text or not text.strip():
         return ""
@@ -734,7 +734,7 @@ def normalize_rich_text(text: str) -> str:
     text = text.replace("\r\n", "\n").replace("\r", "\n")
     # Drop failed spacer experiments so re-normalize is idempotent
     spacer_re = re.compile(
-        r"^(?:\u00a0|&nbsp;|<br\s*/?\s*>(?:\s*<br\s*/?\s*>)?)$",
+        r"^(?:\u00a0|&nbsp;|<br\s*/?\s*>(?:\s*<br\s*/?\s*>)?|\s*)$",
         re.I,
     )
     lines = [ln.rstrip() for ln in text.split("\n") if not spacer_re.match(ln.rstrip())]
@@ -757,54 +757,53 @@ def normalize_rich_text(text: str) -> str:
             return False
         return bool(re.match(r'^[A-ZÅÄÖÉÜÍ"«„‟]', s))
 
+    HARD = "  "  # Markdown hard line break (Shift+Enter equivalent)
+
     out: list[str] = []
     for i, line in enumerate(lines):
         prev = out[-1] if out else None
+        prev_bare = prev.rstrip() if prev is not None else None
 
-        # Blank line before heading (markdown-correct; Figma may still collapse visually)
-        if is_heading(line) and prev is not None and prev != "":
-            if not is_heading(prev):
-                out.append("")
+        # Space ABOVE heading ≈ two Shift+Enter breaks (Figma quirk: these create gap)
+        if is_heading(line) and out:
+            if prev_bare not in (None, ""):
+                # Ensure previous content line ends with a hard break, then two empty hard-breaks
+                if not prev.endswith(HARD):
+                    out[-1] = prev_bare + HARD
+                out.append(HARD)
+                out.append(HARD)
 
         # Blank line between prose paragraphs joined by a single newline
         if (
-            prev
-            and prev != ""
+            prev_bare
+            and prev_bare != ""
             and line
-            and not is_heading(prev)
+            and not is_heading(prev_bare)
             and not is_heading(line)
-            and not is_list_item(prev)
+            and not is_list_item(prev_bare)
             and not is_list_item(line)
-            and ends_sentence(prev)
+            and ends_sentence(prev_bare)
             and starts_paragraph(line)
         ):
-            out.append("")
+            if prev is not None and not prev.endswith(HARD):
+                out[-1] = prev_bare + HARD
+            out.append(HARD)
 
         out.append(line)
 
-        # Blank line after heading before following non-empty body
+        # After heading: hard break then blank structure before body
         if is_heading(line):
             nxt = lines[i + 1] if i + 1 < len(lines) else None
             if nxt is not None and nxt != "" and not is_heading(nxt):
-                out.append("")
+                out.append(HARD)
 
-    collapsed: list[str] = []
-    blank_run = 0
-    for line in out:
-        if line == "":
-            blank_run += 1
-            if blank_run <= 1:
-                collapsed.append("")
-        else:
-            blank_run = 0
-            collapsed.append(line)
+    # Trim leading/trailing hard-break-only / empty lines
+    while out and out[0].strip() == "":
+        out.pop(0)
+    while out and out[-1].strip() == "":
+        out.pop()
 
-    while collapsed and collapsed[0] == "":
-        collapsed.pop(0)
-    while collapsed and collapsed[-1] == "":
-        collapsed.pop()
-
-    return "\n".join(collapsed)
+    return "\n".join(out)
 
 
 def extract_page_body(soup: BeautifulSoup) -> str:
