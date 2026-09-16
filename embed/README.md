@@ -51,6 +51,10 @@ Sites embeds are usually a **fixed height** and do not auto-grow with content.
 - The open size list is an **overlay** (does not grow the page), so you do not need extra height for long variant lists.
 - If anything still clips, give the embed `overflow: visible` if Sites allows it, or bump height slightly.
 
+### Typography / breakpoint modes
+
+v1 uses the type sizes bound on the Style Guide **embed-feature** component (H2 24/36, body-l 18/28, etc.). Figma variable **modes** (Desktop / Mobile) are not switched in CSS yet — the API returns one mode’s values, and for these utility styles Mobile currently reports the same H2/body-l sizes. If Display/H1-scale modes differ for this block on your Sites breakpoints, share the mode table (or a Desktop vs Mobile screenshot) and we can add matching `@media` / `@container` rules.
+
 ## Quote button
 
 `mailto:order@feal.se` with subject/body including the **selected variant name**

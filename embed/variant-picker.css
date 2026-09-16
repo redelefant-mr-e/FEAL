@@ -39,6 +39,8 @@
   line-height: var(--type-line-body);
   width: 100%;
   max-width: 616px;
+  container-type: inline-size;
+  container-name: feal-vp;
 }
 
 .feal-vp *,
@@ -183,7 +185,8 @@
   border-left: 2px solid var(--color-brand-accent);
   padding-left: var(--space-xl);
   gap: var(--space-xs) var(--space-m);
-  grid-template-columns: minmax(0, 0.3fr) minmax(0, 1fr);
+  /* Wider than Figma's 0.3fr so labels like "Längd utfälld:" stay on one line */
+  grid-template-columns: max-content minmax(0, 1fr);
   align-items: center;
 }
 
@@ -217,6 +220,7 @@
   line-height: var(--type-line-body-l);
   color: var(--color-text-primary);
   align-self: center;
+  white-space: nowrap;
 }
 
 .feal-vp__spec-value {
@@ -283,4 +287,15 @@
 
 .feal-vp__status[hidden] {
   display: none;
+}
+
+/* Only wrap labels when the embed itself is very narrow */
+@container feal-vp (max-width: 360px) {
+  .feal-vp__variant {
+    grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+  }
+
+  .feal-vp__spec-label {
+    white-space: normal;
+  }
 }
