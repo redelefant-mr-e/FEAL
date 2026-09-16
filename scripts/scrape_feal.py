@@ -797,6 +797,26 @@ def merge_variants_sv_en(
     return rows
 
 
+_OVERVIEWS_CACHE: dict[str, dict[str, str]] | None = None
+
+
+def load_overviews() -> dict[str, dict[str, str]]:
+    global _OVERVIEWS_CACHE
+    if _OVERVIEWS_CACHE is not None:
+        return _OVERVIEWS_CACHE
+    path = ROOT / "data" / "overviews.json"
+    if not path.exists():
+        _OVERVIEWS_CACHE = {}
+        return _OVERVIEWS_CACHE
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        _OVERVIEWS_CACHE = {}
+        return _OVERVIEWS_CACHE
+    _OVERVIEWS_CACHE = data if isinstance(data, dict) else {}
+    return _OVERVIEWS_CACHE
+
+
 def product_row(
     *,
     title: str,
@@ -817,6 +837,7 @@ def product_row(
     subcategory_en: str = "",
 ) -> dict[str, str]:
     cat = CATEGORIES[category_key]
+    overview = load_overviews().get(slug, {})
     # Header suffixes hint Figma Sites field types on CSV import.
     row = {
         "Title": title,
@@ -828,6 +849,8 @@ def product_row(
         "subcategory_en (Plain text)": subcategory_en,
         "name_sv (Plain text)": name_sv,
         "name_en (Plain text)": name_en,
+        "overview_sv (Plain text)": overview.get("overview_sv", ""),
+        "overview_en (Plain text)": overview.get("overview_en", ""),
         "description_sv (Rich text)": description_sv,
         "description_en (Rich text)": description_en,
         "features_sv (Rich text)": features_sv,
@@ -902,6 +925,8 @@ PRODUCT_FIELDS = [
     "subcategory_en (Plain text)",
     "name_sv (Plain text)",
     "name_en (Plain text)",
+    "overview_sv (Plain text)",
+    "overview_en (Plain text)",
     "description_sv (Rich text)",
     "description_en (Rich text)",
     "features_sv (Rich text)",

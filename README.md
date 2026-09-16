@@ -34,7 +34,9 @@ CSVs are written under `data/csv/<category_key>/` (products + variants together 
 
 Link in Figma: match `variants.product_slug` → `products.Slug` (plain-text; Figma CMS has no relations).
 
-## Images (stable hosting)
+Product listing cards use `overview_sv (Plain text)` / `overview_en (Plain text)` under the product name. These short blurbs live in `data/overviews.json` and are merged into product CSVs on scrape/export.
+
+## Figma Sites import checklist
 
 Figma Sites Image fields only accept **JPEG, PNG, GIF** — **not WebP**.
 
