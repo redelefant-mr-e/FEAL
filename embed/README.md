@@ -11,7 +11,7 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker" data-lang="sv"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260916c"
   defer
 ></script>
 ```
@@ -21,10 +21,13 @@ English pages:
 ```html
 <div id="feal-variant-picker" data-lang="en"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260916c"
   defer
 ></script>
 ```
+
+> **Cache note:** jsDelivr caches `@main` aggressively (up to 7 days). After updates, bump the `?v=` query, or purge:  
+> `https://purge.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.css`
 
 ### How the product is resolved
 

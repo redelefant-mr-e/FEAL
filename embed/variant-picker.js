@@ -8,6 +8,8 @@
   var MOUNT_ID = "feal-variant-picker";
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
+  // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
+  var ASSET_VERSION = "20260916c";
 
   var I18N = {
     sv: {
@@ -345,7 +347,7 @@
     if (!mount) return;
 
     var base = scriptBaseUrl();
-    loadCss(base + "variant-picker.css");
+    loadCss(base + "variant-picker.css?v=" + ASSET_VERSION);
 
     var dataUrl =
       mount.getAttribute(DATA_URL_ATTR) ||
