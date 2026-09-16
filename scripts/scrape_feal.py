@@ -986,11 +986,6 @@ VARIANT_FIELDS = [
 ]
 
 
-def parent_names_for_category(category_key: str) -> tuple[str, str]:
-    cat = CATEGORIES[category_key]
-    return cat["sv"], cat["en"]
-
-
 def run() -> None:
     products_by_cat: dict[str, list[dict[str, str]]] = defaultdict(list)
     variants_by_cat: dict[str, list[dict[str, str]]] = defaultdict(list)
