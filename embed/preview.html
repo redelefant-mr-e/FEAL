@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FEAL variant picker preview</title>
+    <style>
+      body {
+        margin: 40px;
+        font-family: system-ui, sans-serif;
+        background: #fff;
+      }
+      h1 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      button {
+        font: inherit;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+      #feal-variant-picker {
+        margin-top: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>FEAL variant picker preview</h1>
+    <p>Uses <code>data-product</code> override (no real Sites URL needed).</p>
+    <div class="row">
+      <button type="button" data-go="fordonsmonterad-2-delad-ramp" data-lang="sv">
+        Fordon 2-delad (SV)
+      </button>
+      <button type="button" data-go="fordonsmonterad-2-delad-ramp" data-lang="en">
+        Fordon 2-delad (EN)
+      </button>
+      <button type="button" data-go="enkelskena" data-lang="sv">Enkelskena (SV)</button>
+      <button type="button" data-go="suitcase-ramp-aluminium" data-lang="en">
+        Suitcase Alu (EN)
+      </button>
+    </div>
+    <div id="feal-variant-picker" data-product="fordonsmonterad-2-delad-ramp" data-lang="sv"></div>
+    <script>
+      document.querySelectorAll("[data-go]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var mount = document.getElementById("feal-variant-picker");
+          mount.setAttribute("data-product", btn.getAttribute("data-go"));
+          mount.setAttribute("data-lang", btn.getAttribute("data-lang"));
+          // Re-boot by reloading the script logic
+          location.search =
+            "?product=" +
+            encodeURIComponent(btn.getAttribute("data-go")) +
+            "&lang=" +
+            encodeURIComponent(btn.getAttribute("data-lang"));
+        });
+      });
+      (function syncFromQuery() {
+        var params = new URLSearchParams(location.search);
+        var product = params.get("product");
+        var lang = params.get("lang");
+        var mount = document.getElementById("feal-variant-picker");
+        if (product) mount.setAttribute("data-product", product);
+        if (lang) mount.setAttribute("data-lang", lang);
+      })();
+    </script>
+    <script src="./variant-picker.js" defer></script>
+  </body>
+</html>

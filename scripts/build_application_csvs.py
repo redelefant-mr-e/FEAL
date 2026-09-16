@@ -538,6 +538,14 @@ def run() -> None:
         f"\nReconcile: {matched} matched, {missing} missing, {excluded} excluded → {report_path}"
     )
 
+    # Keep Sites variant picker JSON in sync
+    try:
+        from scripts.build_variant_embed_data import main as build_embed_data
+
+        build_embed_data()
+    except Exception as exc:  # pragma: no cover
+        print(f"Warning: embed variants.json not rebuilt ({exc})")
+
 
 if __name__ == "__main__":
     run()

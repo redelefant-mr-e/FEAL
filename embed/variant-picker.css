@@ -1,0 +1,279 @@
+/* FEAL variant picker — tokens from Style Guide embed-feature (node 4284:9004) */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&family=Roboto+Condensed:wght@600&display=swap");
+
+.feal-vp {
+  --color-text-primary: #000000;
+  --color-border-strong: #212529;
+  --color-sand-20: rgba(245, 241, 232, 0.2);
+  --color-brand-accent: #d58c5b;
+  --button-secondary-bg: #0072b7;
+  --button-secondary-text: #ffffff;
+  --button-secondary-border: #0072b7;
+
+  --type-family-body: "Roboto", system-ui, sans-serif;
+  --type-family-heading: "Roboto Condensed", "Roboto", system-ui, sans-serif;
+  --type-size-body: 16px;
+  --type-line-body: 24px;
+  --type-size-body-l: 18px;
+  --type-line-body-l: 28px;
+  --type-size-body-s: 14px;
+  --type-line-body-s: 22px;
+  --type-size-h2: 24px;
+  --type-line-h2: 36px;
+  --type-size-button: 16px;
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-s: 12px;
+  --space-m: 16px;
+  --space-xl: 24px;
+  --button-padding-x: 24px;
+  --button-padding-y: 14px;
+  --button-radius: 100px;
+
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+  font-family: var(--type-family-body);
+  font-size: var(--type-size-body);
+  line-height: var(--type-line-body);
+  width: 100%;
+  max-width: 616px;
+}
+
+.feal-vp *,
+.feal-vp *::before,
+.feal-vp *::after {
+  box-sizing: border-box;
+}
+
+.feal-vp__stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  width: 100%;
+}
+
+.feal-vp__dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  width: 100%;
+  position: relative;
+}
+
+.feal-vp__label {
+  margin: 0;
+  width: 100%;
+  font-family: var(--type-family-body);
+  font-weight: 700;
+  font-size: var(--type-size-body);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  word-break: break-word;
+}
+
+.feal-vp__select {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-m);
+  width: 100%;
+  padding: var(--space-s);
+  background: var(--color-sand-20);
+  border: 1px solid var(--color-border-strong);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.feal-vp__select-value {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--type-size-body);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.feal-vp__select-list {
+  display: none;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--space-m);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feal-vp__select-list button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 400;
+  font-size: var(--type-size-body);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.feal-vp__select-list button:hover,
+.feal-vp__select-list button:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.feal-vp__select-list button[aria-selected="true"] {
+  font-weight: 600;
+}
+
+.feal-vp__chevron {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  transition: transform 0.15s ease;
+}
+
+.feal-vp__chevron svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.feal-vp.is-open .feal-vp__select-value {
+  display: none;
+}
+
+.feal-vp.is-open .feal-vp__select-list {
+  display: flex;
+}
+
+.feal-vp.is-open .feal-vp__chevron {
+  transform: rotate(180deg);
+}
+
+.feal-vp__divider {
+  width: 100%;
+  height: var(--space-xl);
+  background: transparent;
+}
+
+.feal-vp__variant {
+  display: none;
+  width: 100%;
+  max-width: 600px;
+  border-left: 2px solid var(--color-brand-accent);
+  padding-left: var(--space-xl);
+  gap: var(--space-xs) var(--space-m);
+  grid-template-columns: minmax(0, 0.3fr) minmax(0, 1fr);
+  align-items: center;
+}
+
+.feal-vp.has-selection .feal-vp__variant,
+.feal-vp.has-selection .feal-vp__actions {
+  display: grid;
+}
+
+.feal-vp.has-selection .feal-vp__actions {
+  display: flex;
+}
+
+.feal-vp__variant-title {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: var(--space-s) 0;
+  font-family: var(--type-family-heading);
+  font-weight: 600;
+  font-size: var(--type-size-h2);
+  line-height: var(--type-line-h2);
+  color: var(--color-text-primary);
+  white-space: normal;
+  word-break: break-word;
+}
+
+.feal-vp__spec-label {
+  margin: 0;
+  font-family: var(--type-family-body);
+  font-weight: 600;
+  font-size: var(--type-size-body-l);
+  line-height: var(--type-line-body-l);
+  color: var(--color-text-primary);
+  align-self: center;
+}
+
+.feal-vp__spec-value {
+  margin: 0;
+  font-family: var(--type-family-body);
+  font-weight: 400;
+  font-size: var(--type-size-body-l);
+  line-height: var(--type-line-body-l);
+  color: var(--color-text-primary);
+  align-self: center;
+}
+
+.feal-vp__footnote {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: var(--space-xxs) 0;
+  font-family: var(--type-family-body);
+  font-weight: 400;
+  font-size: var(--type-size-body-s);
+  line-height: var(--type-line-body-s);
+  color: var(--color-text-primary);
+}
+
+.feal-vp__actions {
+  display: none;
+  width: 100%;
+  height: 44px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.feal-vp__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border: 0 solid var(--button-secondary-border);
+  border-radius: var(--button-radius);
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  font-family: var(--type-family-body);
+  font-weight: 400;
+  font-size: var(--type-size-button);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.feal-vp__button:hover,
+.feal-vp__button:focus-visible {
+  filter: brightness(0.95);
+  outline: none;
+}
+
+.feal-vp__status {
+  margin: 0;
+  font-size: var(--type-size-body-s);
+  line-height: var(--type-line-body-s);
+  color: var(--color-text-primary);
+}
+
+.feal-vp__status[hidden] {
+  display: none;
+}
