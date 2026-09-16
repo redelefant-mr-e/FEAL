@@ -440,29 +440,129 @@ class PageLangData:
     description: str = ""
     features_md: str = ""
     images: list[str] = field(default_factory=list)
+    # Parallel to images: caption text per image URL (empty string if none)
+    image_captions: dict[str, str] = field(default_factory=dict)
     variants: list[VariantData] = field(default_factory=list)
     # For system pages: section_key -> (section intro, variants)
     sections: dict[str, dict[str, Any]] = field(default_factory=dict)
     url: str = ""
 
 
+IMAGE_SLOT_COUNT = 8
+
+
+def image_asset_key(url: str) -> str:
+    """Stable id from feal CDN path (/1336/cache/...) for SV/EN URL matching."""
+    m = re.search(r"/(\d+)/cache/", url)
+    return m.group(1) if m else url
+
+
+def _caption_candidate(text: str) -> str | None:
+    text = clean_text(text)
+    if not text or is_footer_text(text):
+        return None
+    if ARTICLE_HEAD_RE.search(text):
+        return None
+    if len(text) < 35 or len(text) > 320:
+        return None
+    return text
+
+
+def _caption_near_image(img: Tag) -> str:
+    """Find short caption text paired with an image (column sibling or next object)."""
+    obj = img.find_parent(class_=re.compile(r"sd-object"))
+    if not obj:
+        return ""
+
+    def from_text_obj(el: Tag) -> str | None:
+        if el.find("img"):
+            return None
+        raw = clean_text(el.get_text(" ", strip=True))
+        c = _caption_candidate(raw)
+        if not c:
+            return None
+        h = el.find(["h1", "h2", "h3"])
+        if h:
+            ht = clean_text(h.get_text())
+            if ht and c == ht:
+                return None
+            if ht and c.startswith(ht) and len(c) > len(ht) + 20:
+                c = clean_text(c[len(ht) :])
+        return c
+
+    # 1) Bootstrap column: image + caption as siblings under col-*
+    col = img.find_parent(class_=re.compile(r"\bcol-"))
+    if col is not None:
+        after = False
+        for child in col.children:
+            if not isinstance(child, Tag):
+                continue
+            if img in child.descendants or child.find("img") is img:
+                after = True
+                continue
+            if after:
+                ocls = " ".join(child.get("class") or [])
+                if "sd-object-space" in ocls:
+                    continue
+                if "sd-object-text-image" in ocls or "sd-object-list" in ocls:
+                    c = from_text_obj(child)
+                    if c:
+                        return c
+                if child.find("img"):
+                    break
+
+    # 2) Following siblings of the image object (portable feature cards)
+    cur: Tag | None = obj
+    for _ in range(4):
+        if cur is None:
+            break
+        sib = cur.find_next_sibling()
+        for _ in range(6):
+            if not isinstance(sib, Tag):
+                break
+            scls = " ".join(sib.get("class") or [])
+            if "sd-object-space" in scls:
+                sib = sib.find_next_sibling()
+                continue
+            if "sd-object-text-image" in scls or "sd-object-list" in scls:
+                c = from_text_obj(sib)
+                if c:
+                    return c
+            if sib.find("img"):
+                break
+            sib = sib.find_next_sibling()
+        parent = cur.parent
+        if parent is None or parent.name in ("body", "html"):
+            break
+        cur = parent if isinstance(parent, Tag) else None
+
+    return ""
+
+
 def extract_images(soup: BeautifulSoup) -> list[str]:
+    return [url for url, _ in extract_images_with_captions(soup)]
+
+
+def extract_images_with_captions(soup: BeautifulSoup) -> list[tuple[str, str]]:
+    """Ordered (image_url, caption) pairs from main content surfaces."""
     seen: set[str] = set()
-    images: list[str] = []
+    pairs: list[tuple[str, str]] = []
     for surface in content_surfaces(soup):
+        classes = " ".join(surface.get("class") or [])
+        if "footer" in classes or "header" in classes or "breadcrumb" in classes:
+            continue
         for img in surface.select("img"):
             src = abs_url(img.get("src"))
             if not is_product_image(src) or src in seen:
                 continue
             seen.add(src)
-            images.append(src)
-        # fancybox full-size links
+            pairs.append((src, _caption_near_image(img)))
         for a in surface.select("a.fancybox_group, a[rel='images']"):
             href = abs_url(a.get("href"))
             if is_product_image(href) and href not in seen:
                 seen.add(href)
-                images.append(href)
-    return images
+                pairs.append((href, ""))
+    return pairs
 
 
 FOOTER_MARKERS = (
@@ -980,12 +1080,48 @@ def parse_page(path: str, kind: str) -> PageLangData:
     data = PageLangData(url=abs_url(path))
     data.title, data.description = extract_intro(soup)
     data.features_md = extract_features(soup)
-    data.images = extract_images(soup)
+    pairs = extract_images_with_captions(soup)
+    data.images = [url for url, _ in pairs]
+    data.image_captions = {url: cap for url, cap in pairs if cap}
     if kind == "system":
         data.sections = extract_system_sections(soup)
     else:
         data.variants = extract_leaf_variants(soup)
     return data
+
+
+def lookup_caption(captions: dict[str, str], image_url: str) -> str:
+    """Match caption by exact URL, then by shared feal asset id."""
+    if image_url in captions:
+        return captions[image_url]
+    key = image_asset_key(image_url)
+    for url, cap in captions.items():
+        if image_asset_key(url) == key:
+            return cap
+    return ""
+
+
+def merge_image_slots(
+    sv_images: list[str],
+    en_images: list[str],
+    sv_captions: dict[str, str],
+    en_captions: dict[str, str],
+) -> list[tuple[str, str, str]]:
+    """
+    Merged image list with SV/EN captions per slot.
+    Returns list of (image_url, caption_sv, caption_en), max IMAGE_SLOT_COUNT.
+    """
+    images = list(dict.fromkeys([*sv_images, *en_images]))[:IMAGE_SLOT_COUNT]
+    slots: list[tuple[str, str, str]] = []
+    for url in images:
+        slots.append(
+            (
+                url,
+                lookup_caption(sv_captions, url),
+                lookup_caption(en_captions, url),
+            )
+        )
+    return slots
 
 
 def path_slug(path: str) -> str:
@@ -1055,7 +1191,7 @@ def product_row(
     description_en: str,
     features_sv: str,
     features_en: str,
-    images: list[str],
+    image_slots: list[tuple[str, str, str]],
     source_url_sv: str,
     source_url_en: str,
     parent_page_sv: str = "",
@@ -1087,8 +1223,14 @@ def product_row(
         "parent_page_sv (Plain text)": parent_page_sv,
         "parent_page_en (Plain text)": parent_page_en,
     }
-    for i in range(1, 9):
-        row[f"image_{i} (Image)"] = images[i - 1] if i <= len(images) else ""
+    for i in range(1, IMAGE_SLOT_COUNT + 1):
+        if i <= len(image_slots):
+            url, cap_sv, cap_en = image_slots[i - 1]
+        else:
+            url, cap_sv, cap_en = "", "", ""
+        row[f"image_{i} (Image)"] = url
+        row[f"caption_sv_{i} (Plain text)"] = cap_sv
+        row[f"caption_en_{i} (Plain text)"] = cap_en
     return row
 
 
@@ -1158,7 +1300,15 @@ PRODUCT_FIELDS = [
     "description_en (Rich text)",
     "features_sv (Rich text)",
     "features_en (Rich text)",
-    *[f"image_{i} (Image)" for i in range(1, 9)],
+    *[
+        col
+        for i in range(1, IMAGE_SLOT_COUNT + 1)
+        for col in (
+            f"image_{i} (Image)",
+            f"caption_sv_{i} (Plain text)",
+            f"caption_en_{i} (Plain text)",
+        )
+    ],
     "source_url_sv (Link)",
     "source_url_en (Link)",
     "parent_page_sv (Plain text)",
@@ -1220,7 +1370,9 @@ def run() -> None:
                 n += 1
             product_slugs[category_key].add(slug)
 
-            images = list(dict.fromkeys([*sv.images, *en.images]))
+            images = merge_image_slots(
+                sv.images, en.images, sv.image_captions, en.image_captions
+            )
             title = en.title or sv.title or slug
             products_by_cat[category_key].append(
                 product_row(
@@ -1233,7 +1385,7 @@ def run() -> None:
                     description_en=en.description,
                     features_sv=sv.features_md,
                     features_en=en.features_md,
-                    images=images,
+                    image_slots=images,
                     source_url_sv=sv.url,
                     source_url_en=en.url,
                     subcategory_sv=sub_sv,
@@ -1304,7 +1456,9 @@ def run() -> None:
                     n += 1
                 product_slugs[target_cat].add(slug)
 
-                images = list(dict.fromkeys([*sv.images, *en.images]))
+                images = merge_image_slots(
+                    sv.images, en.images, sv.image_captions, en.image_captions
+                )
                 title = f"{parent_name_en} — {name_en}"
                 # Section intro + shared page body (SKU lists excluded by extractors)
                 desc_sv = "\n\n".join(
@@ -1333,7 +1487,7 @@ def run() -> None:
                         description_en=desc_en,
                         features_sv=sv.features_md if section_key == "ramper" else "",
                         features_en=en.features_md if section_key == "ramper" else "",
-                        images=images,
+                        image_slots=images,
                         source_url_sv=sv.url,
                         source_url_en=en.url,
                         parent_page_sv=parent_name_sv,
