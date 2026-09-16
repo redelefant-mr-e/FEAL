@@ -1,0 +1,5 @@
+# Local download cache for host_images.py (regenerable)
+assets/.cache/
+__pycache__/
+*.pyc
+.DS_Store
