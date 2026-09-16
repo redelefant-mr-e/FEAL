@@ -748,7 +748,12 @@ def normalize_rich_text(text: str) -> str:
         re.I,
     )
 
-    lines = [ln.rstrip() for ln in text.split("\n") if not spacer_re.match(ln.rstrip())]
+    lines = [
+        ln.rstrip()
+        for ln in text.split("\n")
+        if not spacer_re.match(ln.rstrip())
+        and ln.rstrip().replace("\u200b", "").strip() != ""
+    ]
     # Drop model-grid width headers that leaked into narrative
     lines = [ln for ln in lines if not width_group_re.match(ln.strip())]
 
@@ -792,6 +797,10 @@ def normalize_rich_text(text: str) -> str:
         return True
 
     HARD = "  "  # Markdown hard line break — never after list items
+    # Non-list spacer paragraph: blank lines after lists collapse in Figma, and
+    # HARD directly after a list item becomes an empty bullet. A ZWSP line exits
+    # the list so following hard breaks create real vertical gap before a heading.
+    LIST_EXIT = "\u200b"
 
     # Pre-pass: quote attributions must not be list items
     fixed: list[str] = []
@@ -884,8 +893,15 @@ def normalize_rich_text(text: str) -> str:
         # Space ABOVE heading
         if is_heading(line) and out and prev_bare not in (None, ""):
             if is_list_item(prev_bare):
-                out.append("")
-                out.append("")
+                # Exit list, then hard-break gap (blank lines alone collapse)
+                out.append(LIST_EXIT + HARD)
+                out.append(HARD)
+                out.append(HARD)
+            elif prev_bare == LIST_EXIT or prev_bare == "":
+                if prev is not None and prev_bare == LIST_EXIT and not prev.endswith(HARD):
+                    out[-1] = LIST_EXIT + HARD
+                out.append(HARD)
+                out.append(HARD)
             else:
                 if not prev.endswith(HARD):
                     out[-1] = prev_bare + HARD
