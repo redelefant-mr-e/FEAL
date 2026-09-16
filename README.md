@@ -34,7 +34,9 @@ CSVs are written under `data/csv/<category_key>/` (products + variants together 
 
 Link in Figma: match `variants.product_slug` → `products.Slug` (plain-text; Figma CMS has no relations).
 
-Product listing cards use `overview_sv (Plain text)` / `overview_en (Plain text)` under the product name. These short blurbs live in `data/overviews.json` and are merged into product CSVs on scrape/export.
+Product listing cards use `overview_sv (Plain text)` / `overview_en (Plain text)` under the product name (short blurbs from `data/overviews.json`, about 80–110 characters).
+
+`category_*` is the top-level group (e.g. Portabla ramper). `subcategory_*` is the product leaf label (e.g. Fasta ramper / Fixed Ramps), not a repeat of the category.
 
 ## Figma Sites import checklist
 

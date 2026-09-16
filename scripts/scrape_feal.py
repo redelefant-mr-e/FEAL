@@ -156,6 +156,26 @@ PRODUCT_PAGES: list[tuple[str, str, str, str]] = [
     ),
 ]
 
+# Nav leaf labels for subcategory (SV, EN), keyed by Swedish path slug
+LEAF_SUBCATEGORIES: dict[str, dict[str, str]] = {
+    "fasta-ramper": {"sv": "Fasta ramper", "en": "Fixed Ramps"},
+    "teleskopramper": {"sv": "Teleskopramper", "en": "Teleskopic Ramps"},
+    "vikbara-ramper": {"sv": "Vikbara ramper", "en": "Folding Ramps"},
+    "vikbara-teleskopramper": {"sv": "Vikbara teleskopramper", "en": "Folding Telescopic Ramps"},
+    "lastskenor": {"sv": "Lastskenor", "en": "Loading Rails"},
+    "anyramp": {"sv": "Anyramp", "en": "Anyramp"},
+    "iramp-portabel": {"sv": "iRamp Portabel", "en": "iRamp Portabel"},
+    "iramp-carbon": {"sv": "iRamp Carbon", "en": "iRamp Carbon"},
+    "iramp-vehicle-tvadelad": {"sv": "iRAMP Vehicle tvådelad", "en": "iRAMP Vehicle two-piece"},
+    "iramp-vehicle-tredelad": {"sv": "iRAMP Vehicle tredelad", "en": "iRAMP Vehicle three-piece"},
+    "lastramper": {"sv": "Lastramper", "en": "Loading ramps"},
+    "drive-in-ramper": {"sv": "Drive in-ramper", "en": "Drive in ramps"},
+    "troeskelramper-aluminium": {"sv": "Tröskelramper Aluminium", "en": "Threshold Ramps Aluminium"},
+    "troeskelramper-plast": {"sv": "Tröskelramper Plast", "en": "Threshold Ramps Plastic"},
+    "troeskelramper-gummi": {"sv": "Tröskelramper Gummi", "en": "Threshold Ramps Rubber"},
+    "taeckplatar": {"sv": "Täckplåtar", "en": "Cover Plates"},
+}
+
 # System section name normalization (SV / EN heading → key)
 SECTION_ALIASES: dict[str, str] = {
     "ramper": "ramper",
@@ -984,10 +1004,12 @@ def run() -> None:
         print(f"  [{kind}] {sv_path}")
         sv = parse_page(sv_path, kind)
         en = parse_page(en_path, kind)
-        sub_sv, sub_en = parent_names_for_category(category_key)
 
         if kind == "leaf":
             slug = path_slug(sv_path)
+            leaf = LEAF_SUBCATEGORIES.get(slug, {})
+            sub_sv = leaf.get("sv") or slug
+            sub_en = leaf.get("en") or slug
             # ensure unique
             base_slug = slug
             n = 2
@@ -1098,12 +1120,8 @@ def run() -> None:
                         source_url_en=en.url,
                         parent_page_sv=parent_name_sv,
                         parent_page_en=parent_name_en,
-                        subcategory_sv=CATEGORIES[target_cat]["sv"]
-                        if target_cat == "accessories"
-                        else sub_sv,
-                        subcategory_en=CATEGORIES[target_cat]["en"]
-                        if target_cat == "accessories"
-                        else sub_en,
+                        subcategory_sv=name_sv,
+                        subcategory_en=name_en,
                     )
                 )
 
