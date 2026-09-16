@@ -722,14 +722,20 @@ def _block_markdown(obj: Tag) -> str | None:
 
 def normalize_rich_text(text: str) -> str:
     """
-    Beautify Markdown rich text for Figma: blank lines after headings,
-    between paragraphs, and between feature sections.
+    Beautify Markdown rich text for Figma: clear gaps before/after headings
+    and between paragraphs. Uses an NBSP spacer line before headings because
+    Figma rich text often collapses plain blank lines against heading styles.
     """
     if not text or not text.strip():
         return ""
 
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    lines = [ln.rstrip() for ln in text.split("\n")]
+    # Drop previous spacer-only lines so re-normalize is idempotent
+    lines = [
+        ln.rstrip()
+        for ln in text.split("\n")
+        if ln.rstrip() not in ("\u00a0", "&nbsp;")
+    ]
 
     def is_heading(line: str) -> bool:
         return bool(re.match(r"^#{1,6}\s+\S", line))
@@ -747,22 +753,25 @@ def normalize_rich_text(text: str) -> str:
         s = line.lstrip()
         if not s or is_heading(s) or is_list_item(s):
             return False
-        # Capital letter, opening quote, or Swedish/typographic quote
         return bool(re.match(r'^[A-ZÅÄÖÉÜÍ"«„‟]', s))
 
     out: list[str] = []
     for i, line in enumerate(lines):
         prev = out[-1] if out else None
 
-        # Blank line before heading (when previous was non-empty non-heading)
-        if is_heading(line) and prev is not None and prev != "":
-            if not is_heading(prev):
+        # Space ABOVE heading: blank + NBSP spacer + blank (Figma needs a real line)
+        if is_heading(line) and out:
+            # Skip if we are already at start after trimming
+            if prev != "":
                 out.append("")
+            out.append("\u00a0")
+            out.append("")
 
         # Blank line between prose paragraphs joined by a single newline
         if (
             prev
             and prev != ""
+            and prev != "\u00a0"
             and line
             and not is_heading(prev)
             and not is_heading(line)
@@ -779,10 +788,9 @@ def normalize_rich_text(text: str) -> str:
         if is_heading(line):
             nxt = lines[i + 1] if i + 1 < len(lines) else None
             if nxt is not None and nxt != "" and not is_heading(nxt):
-                # Only insert if next emitted won't already be blank
                 out.append("")
 
-    # Collapse 3+ blank lines to a single blank (i.e. max one empty line)
+    # Collapse runs of blank lines, but keep NBSP spacer lines
     collapsed: list[str] = []
     blank_run = 0
     for line in out:
@@ -794,10 +802,9 @@ def normalize_rich_text(text: str) -> str:
             blank_run = 0
             collapsed.append(line)
 
-    # Trim leading/trailing blank lines
-    while collapsed and collapsed[0] == "":
+    while collapsed and collapsed[0] in ("", "\u00a0"):
         collapsed.pop(0)
-    while collapsed and collapsed[-1] == "":
+    while collapsed and collapsed[-1] in ("", "\u00a0"):
         collapsed.pop()
 
     return "\n".join(collapsed)
