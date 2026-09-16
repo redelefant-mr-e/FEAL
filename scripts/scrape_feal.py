@@ -465,50 +465,242 @@ def extract_images(soup: BeautifulSoup) -> list[str]:
     return images
 
 
+FOOTER_MARKERS = (
+    "iramp is a premium",
+    "the family company feal",
+    "webbproduktion",
+    "feal ab |",
+    "södra industriområdet",
+    "finding creative solutions",
+)
+
+MODEL_SECTION_RE = re.compile(
+    r"(modeller|teknisk information|technical information|product range|"
+    r"which ramp should i choose|vilken ramp ska jag välja)",
+    re.I,
+)
+WIDTH_GROUP_RE = re.compile(r"^bredd\s+\d+\s*mm$", re.I)
+WIDTH_GROUP_EN_RE = re.compile(r"^width\s+\d+\s*mm$", re.I)
+
+
+def is_footer_text(text: str) -> bool:
+    low = text.lower()
+    return any(m in low for m in FOOTER_MARKERS)
+
+
+def is_sku_or_model_heading(text: str) -> bool:
+    text = clean_text(text)
+    if not text:
+        return False
+    if ARTICLE_HEAD_RE.match(text):
+        return True
+    if WIDTH_GROUP_RE.match(text) or WIDTH_GROUP_EN_RE.match(text):
+        return True
+    if MODEL_SECTION_RE.search(text) and (
+        "teknisk" in text.lower()
+        or "technical" in text.lower()
+        or "modeller" in text.lower()
+        or "product range" in text.lower()
+    ):
+        return True
+    return False
+
+
+def extract_title(soup: BeautifulSoup) -> str:
+    h1 = soup.select_one(".sd-surface-page h1.TITLE") or soup.select_one("h1.TITLE")
+    return clean_text(h1.get_text()) if h1 else ""
+
+
+def _block_markdown(obj: Tag) -> str | None:
+    """Convert one sd-object content block to markdown, or None to skip."""
+    classes = " ".join(obj.get("class") or [])
+    if "sd-object-space" in classes or "sd-object-grid" in classes:
+        return None
+    if "sd-object-form" in classes or "sd-object-menu" in classes:
+        return None
+
+    # Prefer structured children
+    heading = obj.find(["h1", "h2", "h3"], recursive=True)
+    lists = obj.find_all(["ul", "ol"], recursive=True)
+    text = clean_text(obj.get_text("\n", strip=True))
+    if not text or is_footer_text(text):
+        return None
+
+    if heading:
+        htext = clean_text(heading.get_text())
+        if not htext:
+            return None
+        if heading.name == "h1" or "TITLE" in classes:
+            return None  # title stored separately
+        if is_sku_or_model_heading(htext):
+            return "__STOP__"
+        if MODEL_SECTION_RE.search(htext) and (
+            "teknisk" in htext.lower()
+            or "technical" in htext.lower()
+            or "modeller" in htext.lower()
+            or "models" in htext.lower()
+            or "product range" in htext.lower()
+        ):
+            return "__STOP__"
+
+        level = "##" if heading.name == "h2" or "HEADING" in classes else "###"
+        if "SUBHEADING" in classes:
+            # Feature card titles go to features field; skip duplicate in body
+            # unless there is extra list/paragraph content in the same block
+            extra = clean_text(text[len(htext) :].strip()) if text.startswith(htext) else ""
+            if not extra and not lists:
+                return None
+            parts = [f"### {htext}"]
+            if lists:
+                for ul in lists:
+                    for li in ul.find_all("li"):
+                        lit = clean_text(li.get_text(" ", strip=True))
+                        if lit:
+                            parts.append(f"- {lit}")
+            elif extra:
+                parts.append(extra)
+            return "\n".join(parts)
+
+        parts = [f"{level} {htext}"]
+        # Remaining text after heading
+        remainder = text
+        if remainder.startswith(htext):
+            remainder = clean_text(remainder[len(htext) :])
+        if lists:
+            for ul in lists:
+                for li in ul.find_all("li"):
+                    lit = clean_text(li.get_text(" ", strip=True))
+                    if lit:
+                        parts.append(f"- {lit}")
+            # also any non-list prose in block
+            prose = clean_text(
+                " ".join(
+                    t
+                    for t in obj.find_all(string=True)
+                    if t.parent
+                    and t.parent.name not in ("li", "h1", "h2", "h3", "script", "style")
+                    and clean_text(str(t))
+                    and clean_text(str(t)) != htext
+                )
+            )
+            # Simpler: strip list item texts from remainder
+            if remainder:
+                for li in obj.find_all("li"):
+                    lit = clean_text(li.get_text(" ", strip=True))
+                    if lit:
+                        remainder = remainder.replace(lit, " ")
+                remainder = clean_text(remainder)
+                if remainder and remainder != htext:
+                    parts.insert(1, remainder)
+        elif remainder:
+            parts.append(remainder)
+        return "\n\n".join(p for p in parts if p)
+
+    # List and/or paragraph block (no heading)
+    if lists:
+        lines: list[str] = []
+        # Keep surrounding prose (e.g. lead paragraph above bullets)
+        remainder = text
+        for li in obj.find_all("li"):
+            lit = clean_text(li.get_text(" ", strip=True))
+            if lit:
+                remainder = remainder.replace(lit, " ")
+                lines.append(f"- {lit}")
+        remainder = clean_text(remainder)
+        chunks: list[str] = []
+        if remainder and not ARTICLE_HEAD_RE.match(remainder):
+            chunks.append(remainder)
+        if lines:
+            chunks.append("\n".join(lines))
+        return "\n\n".join(chunks) if chunks else None
+
+    if ARTICLE_HEAD_RE.match(text):
+        return "__STOP__"
+    return text
+
+
+def extract_page_body(soup: BeautifulSoup) -> str:
+    """
+    Full on-page narrative as Markdown (SV or EN page).
+    Excludes H1 title, SKU/model sections, nav, and footer boilerplate.
+    """
+    parts: list[str] = []
+    seen_norm: set[str] = set()
+
+    for surface in content_surfaces(soup):
+        classes = " ".join(surface.get("class") or [])
+        if "footer" in classes or "header" in classes or "breadcrumb" in classes:
+            continue
+
+        # Top-level text/image objects only (avoid nested duplicates)
+        objects = []
+        for obj in surface.find_all(class_=re.compile(r"sd-object")):
+            ocls = " ".join(obj.get("class") or [])
+            if "sd-object-text-image" not in ocls and "sd-object-list" not in ocls:
+                continue
+            parent = obj.find_parent(class_=re.compile(r"sd-object-text-image"))
+            if parent is not None and parent != obj:
+                continue
+            objects.append(obj)
+
+        stop_surface = False
+        for obj in objects:
+            md = _block_markdown(obj)
+            if md is None:
+                continue
+            if md == "__STOP__":
+                stop_surface = True
+                break
+            # Deduplicate near-identical blocks
+            norm = re.sub(r"\s+", " ", md).strip().lower()
+            if norm in seen_norm:
+                continue
+            seen_norm.add(norm)
+            parts.append(md)
+
+        if stop_surface:
+            # Do not process later model surfaces
+            break
+
+    # Join and tidy (collapse whitespace-only lines from empty CMS nodes)
+    body = "\n\n".join(parts)
+    body = re.sub(r"[ \t]+\n", "\n", body)
+    body = re.sub(r"\n{3,}", "\n\n", body).strip()
+    return body
+
+
 def extract_features(soup: BeautifulSoup) -> str:
     blocks: list[str] = []
     for h3 in soup.select("h3.SUBHEADING"):
         title = clean_text(h3.get_text())
+        if not title:
+            continue
         body = ""
         col = h3.find_parent(class_=re.compile(r"col-"))
         search_root = col or h3.find_parent(class_=re.compile(r"sd-object"))
         if search_root:
             for obj in search_root.select(".sd-object"):
                 classes = " ".join(obj.get("class") or [])
-                if "SUBHEADING" in classes:
+                if "SUBHEADING" in classes or "TITLE" in classes:
                     continue
                 t = clean_text(obj.get_text(" ", strip=True))
-                if t and t != title and not t.startswith("http"):
-                    body = t
-                    break
-        if title:
-            if body:
-                blocks.append(f"### {title}\n{body}")
-            else:
-                blocks.append(f"### {title}")
+                if not t or t == title or t.startswith("http") or is_footer_text(t):
+                    continue
+                if ARTICLE_HEAD_RE.match(t):
+                    continue
+                body = t
+                break
+        if body:
+            blocks.append(f"### {title}\n{body}")
+        else:
+            blocks.append(f"### {title}")
     return "\n\n".join(blocks)
 
 
 def extract_intro(soup: BeautifulSoup) -> tuple[str, str]:
-    """Return (h1 title, description paragraph)."""
-    h1 = soup.select_one(".sd-surface-page h1.TITLE") or soup.select_one("h1.TITLE")
-    title = clean_text(h1.get_text()) if h1 else ""
-    description = ""
-    if h1:
-        obj = h1.find_parent(class_=re.compile(r"sd-object"))
-        if obj:
-            for sib in obj.next_siblings:
-                if not isinstance(sib, Tag):
-                    continue
-                classes = " ".join(sib.get("class") or [])
-                if "sd-object" not in classes:
-                    continue
-                if "TITLE" in classes or "SUBHEADING" in classes or "HEADING" in classes:
-                    break
-                t = clean_text(sib.get_text(" ", strip=True))
-                if t and len(t) > 20:
-                    description = t
-                    break
+    """Return (h1 title, full page body markdown)."""
+    title = extract_title(soup)
+    description = extract_page_body(soup)
     return title, description
 
 
@@ -710,11 +902,20 @@ def extract_system_sections(soup: BeautifulSoup) -> dict[str, dict[str, Any]]:
             ):
                 elements.append(child)
             elif child.name == "div" and child.get("class") and "sd-object" in child.get("class", []):
-                # only top-ish objects that contain strong article or text with articles
+                # Top-level text objects: SKU blocks and section intro blurbs
                 if child.find(["h1", "h2", "h3"]):
                     continue
+                ocls = " ".join(child.get("class") or [])
+                if "sd-object-text-image" not in ocls and "sd-object-list" not in ocls:
+                    continue
+                parent = child.find_parent(class_=re.compile(r"sd-object-text-image"))
+                if parent is not None and parent != child:
+                    continue
                 text = clean_text(child.get_text(" ", strip=True))
-                if ARTICLE_HEAD_RE.search(text) and len(text) > 5:
+                if not text or len(text) < 5:
+                    continue
+                # Include SKU/spec blocks and plain intro paragraphs
+                if ARTICLE_HEAD_RE.search(text) or len(text) > 30:
                     elements.append(child)
 
     # Deduplicate nested: keep outermost occurrences by identity order
@@ -754,7 +955,13 @@ def extract_system_sections(soup: BeautifulSoup) -> dict[str, dict[str, Any]]:
             text = clean_text(el.get_text("\n", strip=True))
             # section intro if no article yet and no article number
             if not ARTICLE_HEAD_RE.search(text):
-                if not sections[current_key]["intro"] and len(text) > 30:
+                low = text.lower()
+                if (
+                    not sections[current_key]["intro"]
+                    and len(text) > 30
+                    and "fler varianter" not in low
+                    and not text.lstrip().startswith("*")
+                ):
                     sections[current_key]["intro"] = text
                 continue
             for v in extract_variants_from_text_blob(text):
@@ -1099,6 +1306,22 @@ def run() -> None:
 
                 images = list(dict.fromkeys([*sv.images, *en.images]))
                 title = f"{parent_name_en} — {name_en}"
+                # Section intro + shared page body (SKU lists excluded by extractors)
+                desc_sv = "\n\n".join(
+                    p
+                    for p in (sv_sec.get("intro") or "", sv.description)
+                    if p and p.strip()
+                )
+                desc_en = "\n\n".join(
+                    p
+                    for p in (en_sec.get("intro") or "", en.description)
+                    if p and p.strip()
+                )
+                # Prefer section-only when shared body is just the first section's blurb
+                if sv_sec.get("intro"):
+                    desc_sv = sv_sec["intro"]
+                if en_sec.get("intro"):
+                    desc_en = en_sec["intro"]
                 products_by_cat[target_cat].append(
                     product_row(
                         title=title,
@@ -1106,8 +1329,8 @@ def run() -> None:
                         category_key=target_cat,
                         name_sv=f"{parent_name_sv} — {name_sv}",
                         name_en=title,
-                        description_sv=sv_sec.get("intro") or sv.description,
-                        description_en=en_sec.get("intro") or en.description,
+                        description_sv=desc_sv,
+                        description_en=desc_en,
                         features_sv=sv.features_md if section_key == "ramper" else "",
                         features_en=en.features_md if section_key == "ramper" else "",
                         images=images,
