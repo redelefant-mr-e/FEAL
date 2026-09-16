@@ -53,7 +53,18 @@ Sites embeds are usually a **fixed height** and do not auto-grow with content.
 
 ### Typography / breakpoint modes
 
-v1 uses the type sizes bound on the Style Guide **embed-feature** component (H2 24/36, body-l 18/28, etc.). Figma variable **modes** (Desktop / Mobile) are not switched in CSS yet — the API returns one mode’s values, and for these utility styles Mobile currently reports the same H2/body-l sizes. If Display/H1-scale modes differ for this block on your Sites breakpoints, share the mode table (or a Desktop vs Mobile screenshot) and we can add matching `@media` / `@container` rules.
+Type size + line-height follow Style Guide variables (`type/size/utility`, `type/line-height`) across **Desktop / Tablet / Mobile**:
+
+| Token | Desktop | Tablet (≤991) | Mobile (≤767) |
+|---|---:|---:|---:|
+| h2 | 24/36 | 22/34 | 20/32 |
+| body-l | 18/28 | 17/26 | 16/24 |
+| body | 16/24 | 16/22 | 16/22 |
+| body-s | 14/22 | 13/20 | 13/20 |
+| button | 14/20 | 14/20 | 13/18 |
+| label | 16/16 | 16/16 | 14/14 |
+
+Applied via viewport `@media` and matching `@container` rules on the embed width.
 
 ## Quote button
 

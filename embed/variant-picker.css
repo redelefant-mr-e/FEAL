@@ -1,8 +1,9 @@
-/* FEAL variant picker — tokens from Style Guide embed-feature (node 4284:9004) */
+/* FEAL variant picker — Style Guide tokens + Desktop/Tablet/Mobile type modes */
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&family=Roboto+Condensed:wght@600&display=swap");
 
 .feal-vp {
+  /* Desktop defaults (type/size/utility + type/line-height) */
   --color-text-primary: #000000;
   --color-border-strong: #212529;
   --color-sand-20: rgba(245, 241, 232, 0.2);
@@ -13,6 +14,7 @@
 
   --type-family-body: "Roboto", system-ui, sans-serif;
   --type-family-heading: "Roboto Condensed", "Roboto", system-ui, sans-serif;
+
   --type-size-body: 16px;
   --type-line-body: 24px;
   --type-size-body-l: 18px;
@@ -21,7 +23,10 @@
   --type-line-body-s: 22px;
   --type-size-h2: 24px;
   --type-line-h2: 36px;
-  --type-size-button: 16px;
+  --type-size-button: 14px;
+  --type-line-button: 20px;
+  --type-size-label: 16px;
+  --type-line-label: 16px;
 
   --space-xxs: 4px;
   --space-xs: 8px;
@@ -72,8 +77,8 @@
   width: 100%;
   font-family: var(--type-family-body);
   font-weight: 700;
-  font-size: var(--type-size-body);
-  line-height: var(--type-line-body);
+  font-size: var(--type-size-label);
+  line-height: var(--type-line-label);
   color: var(--color-text-primary);
   word-break: break-word;
 }
@@ -100,7 +105,7 @@
   margin: 0;
   font-weight: 400;
   font-size: var(--type-size-body);
-  line-height: 1.5;
+  line-height: var(--type-line-body);
   color: var(--color-text-primary);
 }
 
@@ -135,7 +140,7 @@
   font: inherit;
   font-weight: 400;
   font-size: var(--type-size-body);
-  line-height: 1.5;
+  line-height: var(--type-line-body);
   color: var(--color-text-primary);
   text-align: left;
   cursor: pointer;
@@ -185,8 +190,8 @@
   border-left: 2px solid var(--color-brand-accent);
   padding-left: var(--space-xl);
   gap: var(--space-xs) var(--space-m);
-  /* Wider than Figma's 0.3fr so labels like "Längd utfälld:" stay on one line */
-  grid-template-columns: max-content minmax(0, 1fr);
+  /* Extra room so "Längd utfälld:" / "Höjd hopvikt:" stay on one line */
+  grid-template-columns: minmax(13.5rem, max-content) minmax(0, 1fr);
   align-items: center;
 }
 
@@ -247,10 +252,10 @@
 .feal-vp__actions {
   display: none;
   width: 100%;
-  height: 44px;
+  min-height: 44px;
   align-items: center;
   overflow: hidden;
-  margin-top: var(--space-xs);
+  margin-top: var(--space-s);
 }
 
 .feal-vp__button {
@@ -266,7 +271,7 @@
   font-family: var(--type-family-body);
   font-weight: 400;
   font-size: var(--type-size-button);
-  line-height: 1;
+  line-height: var(--type-line-button);
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
@@ -289,13 +294,72 @@
   display: none;
 }
 
-/* Only wrap labels when the embed itself is very narrow */
-@container feal-vp (max-width: 360px) {
-  .feal-vp__variant {
-    grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+/* Relume / Figma Sites breakpoints: Tablet ≤991, Mobile ≤767 */
+@media (max-width: 991px) {
+  .feal-vp {
+    --type-size-h2: 22px;
+    --type-line-h2: 34px;
+    --type-size-body-l: 17px;
+    --type-line-body-l: 26px;
+    --type-size-body: 16px;
+    --type-line-body: 22px;
+    --type-size-body-s: 13px;
+    --type-line-body-s: 20px;
+    --type-size-button: 14px;
+    --type-line-button: 20px;
+    --type-size-label: 16px;
+    --type-line-label: 16px;
   }
+}
 
-  .feal-vp__spec-label {
-    white-space: normal;
+@media (max-width: 767px) {
+  .feal-vp {
+    --type-size-h2: 20px;
+    --type-line-h2: 32px;
+    --type-size-body-l: 16px;
+    --type-line-body-l: 24px;
+    --type-size-body: 16px;
+    --type-line-body: 22px;
+    --type-size-body-s: 13px;
+    --type-line-body-s: 20px;
+    --type-size-button: 13px;
+    --type-line-button: 18px;
+    --type-size-label: 14px;
+    --type-line-label: 14px;
+  }
+}
+
+/* Same scale when the embed box itself is narrow (Sites fixed-width slot) */
+@container feal-vp (max-width: 991px) {
+  .feal-vp {
+    --type-size-h2: 22px;
+    --type-line-h2: 34px;
+    --type-size-body-l: 17px;
+    --type-line-body-l: 26px;
+    --type-size-body: 16px;
+    --type-line-body: 22px;
+    --type-size-body-s: 13px;
+    --type-line-body-s: 20px;
+    --type-size-button: 14px;
+    --type-line-button: 20px;
+    --type-size-label: 16px;
+    --type-line-label: 16px;
+  }
+}
+
+@container feal-vp (max-width: 767px) {
+  .feal-vp {
+    --type-size-h2: 20px;
+    --type-line-h2: 32px;
+    --type-size-body-l: 16px;
+    --type-line-body-l: 24px;
+    --type-size-body: 16px;
+    --type-line-body: 22px;
+    --type-size-body-s: 13px;
+    --type-line-body-s: 20px;
+    --type-size-button: 13px;
+    --type-line-button: 18px;
+    --type-size-label: 14px;
+    --type-line-label: 14px;
   }
 }
