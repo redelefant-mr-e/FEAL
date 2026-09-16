@@ -1,5 +1,5 @@
-Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),inside_width_mm (Plain text),folded_length_mm (Plain text),folded_height_mm (Plain text),weight_kg (Plain text),max_load_kg (Plain text),rec_max_height_mm (Plain text),adjustable_height_mm (Plain text),angle_deg (Plain text),other_specs_sv (Plain text),other_specs_en (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),image (Image),source_url_sv (Link),source_url_en (Link)
-"10851 Loading ramp, 2-piece, 1600x820 mm",10851,fordonsmonterad-2-delad-ramp,fordon,10851,"Fordonsmonterad ramp, 2-delad, 1600x820","10851 Loading ramp, 2-piece, 1600x820 mm",1600,820,,,961,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 1600 mm
+Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),folded_height_mm (Plain text),max_load_kg (Plain text),other_specs_sv (Plain text),other_specs_en (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),source_url_sv (Link),source_url_en (Link)
+"10851 Loading ramp, 2-piece, 1600x820 mm",10851,fordonsmonterad-2-delad-ramp,fordon,10851,"Fordonsmonterad ramp, 2-delad, 1600x820","10851 Loading ramp, 2-piece, 1600x820 mm",1600,820,961,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 1600 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 961 mm
 (D) Bredd ramp: 965 mm
@@ -9,8 +9,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 1600 mm
 (C) Height folded: 961 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10853 Loading ramp, 2-piece, 1800x820 mm",10853,fordonsmonterad-2-delad-ramp,fordon,10853,"Fordonsmonterad ramp, 2-delad, 1800x820","10853 Loading ramp, 2-piece, 1800x820 mm",1800,820,,,1061,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 1800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10853 Loading ramp, 2-piece, 1800x820 mm",10853,fordonsmonterad-2-delad-ramp,fordon,10853,"Fordonsmonterad ramp, 2-delad, 1800x820","10853 Loading ramp, 2-piece, 1800x820 mm",1800,820,1061,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 1800 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1061 mm
 (D) Bredd ramp: 965 mm
@@ -20,8 +20,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 1800 mm
 (C) Height folded: 1061 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10855 Loading ramp, 2-piece, 2000x820 mm",10855,fordonsmonterad-2-delad-ramp,fordon,10855,"Fordonsmonterad ramp, 2-delad, 2000x820","10855 Loading ramp, 2-piece, 2000x820 mm",2000,820,,,1161,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2000 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10855 Loading ramp, 2-piece, 2000x820 mm",10855,fordonsmonterad-2-delad-ramp,fordon,10855,"Fordonsmonterad ramp, 2-delad, 2000x820","10855 Loading ramp, 2-piece, 2000x820 mm",2000,820,1161,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2000 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1161 mm
 (D) Bredd ramp: 965 mm
@@ -31,8 +31,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2000 mm
 (C) Height folded: 1161 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10861 Loading ramp, 2-piece, 2200x820 mm",10861,fordonsmonterad-2-delad-ramp,fordon,10861,"Fordonsmonterad ramp, 2-delad, 2200x820","10861 Loading ramp, 2-piece, 2200x820 mm",2200,820,,,1261,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2200 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10861 Loading ramp, 2-piece, 2200x820 mm",10861,fordonsmonterad-2-delad-ramp,fordon,10861,"Fordonsmonterad ramp, 2-delad, 2200x820","10861 Loading ramp, 2-piece, 2200x820 mm",2200,820,1261,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2200 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1261 mm
 (D) Bredd ramp: 965 mm
@@ -42,8 +42,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2200 mm
 (C) Height folded: 1261 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10863 Loading ramp, 2-piece, 2400x820 mm",10863,fordonsmonterad-2-delad-ramp,fordon,10863,"Fordonsmonterad ramp, 2-delad, 2400x820","10863 Loading ramp, 2-piece, 2400x820 mm",2400,820,,,1361,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2400 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10863 Loading ramp, 2-piece, 2400x820 mm",10863,fordonsmonterad-2-delad-ramp,fordon,10863,"Fordonsmonterad ramp, 2-delad, 2400x820","10863 Loading ramp, 2-piece, 2400x820 mm",2400,820,1361,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2400 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1361 mm
 (D) Bredd ramp: 965 mm
@@ -53,8 +53,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2400 mm
 (C) Height folded: 1361 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10872 Loading ramp, 2-piece, 2600x820 mm",10872,fordonsmonterad-2-delad-ramp,fordon,10872,"Fordonsmonterad ramp, 2-delad, 2600x820","10872 Loading ramp, 2-piece, 2600x820 mm",2600,820,,,1461,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2600 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10872 Loading ramp, 2-piece, 2600x820 mm",10872,fordonsmonterad-2-delad-ramp,fordon,10872,"Fordonsmonterad ramp, 2-delad, 2600x820","10872 Loading ramp, 2-piece, 2600x820 mm",2600,820,1461,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2600 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1461 mm
 (D) Bredd ramp: 965 mm
@@ -64,8 +64,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2600 mm
 (C) Height folded: 1461 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10874 Loading ramp, 2-piece, 2800x820 mm",10874,fordonsmonterad-2-delad-ramp,fordon,10874,"Fordonsmonterad ramp, 2-delad, 2800x820","10874 Loading ramp, 2-piece, 2800x820 mm",2800,820,,,1561,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10874 Loading ramp, 2-piece, 2800x820 mm",10874,fordonsmonterad-2-delad-ramp,fordon,10874,"Fordonsmonterad ramp, 2-delad, 2800x820","10874 Loading ramp, 2-piece, 2800x820 mm",2800,820,1561,400,Totalbredd: 965 mm | Djup ihopvikt: 241 mm,Total width: 965 mm | Folded depth: 241 mm,"(A) Längd plattform: 2800 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1561 mm
 (D) Bredd ramp: 965 mm
@@ -75,8 +75,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2800 mm
 (C) Height folded: 1561 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"12374 Loading ramp, 2-piece, 1600x900 mm",12374,fordonsmonterad-2-delad-ramp,fordon,12374,"Fordonsmonterad ramp, 2-delad, 1600x900","12374 Loading ramp, 2-piece, 1600x900 mm",1600,900,,,961,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 1600 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"12374 Loading ramp, 2-piece, 1600x900 mm",12374,fordonsmonterad-2-delad-ramp,fordon,12374,"Fordonsmonterad ramp, 2-delad, 1600x900","12374 Loading ramp, 2-piece, 1600x900 mm",1600,900,961,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 1600 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 961 mm
 (D) Bredd ramp: 1045 mm
@@ -86,8 +86,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 1600 mm
 (C) Height folded: 961 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10852 Loading ramp, 2-piece, 1800x900 mm",10852,fordonsmonterad-2-delad-ramp,fordon,10852,"Fordonsmonterad ramp, 2-delad, 1800x900","10852 Loading ramp, 2-piece, 1800x900 mm",1800,900,,,1061,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 1800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10852 Loading ramp, 2-piece, 1800x900 mm",10852,fordonsmonterad-2-delad-ramp,fordon,10852,"Fordonsmonterad ramp, 2-delad, 1800x900","10852 Loading ramp, 2-piece, 1800x900 mm",1800,900,1061,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 1800 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1061 mm
 (D) Bredd ramp: 1045 mm
@@ -97,8 +97,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 1800 mm
 (C) Height folded: 1061 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10854 Loading ramp, 2-piece, 2000x900 mm",10854,fordonsmonterad-2-delad-ramp,fordon,10854,"Fordonsmonterad ramp, 2-delad, 2000x900","10854 Loading ramp, 2-piece, 2000x900 mm",2000,900,,,1161,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2000 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10854 Loading ramp, 2-piece, 2000x900 mm",10854,fordonsmonterad-2-delad-ramp,fordon,10854,"Fordonsmonterad ramp, 2-delad, 2000x900","10854 Loading ramp, 2-piece, 2000x900 mm",2000,900,1161,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2000 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1161 mm
 (D) Bredd ramp: 1045 mm
@@ -108,8 +108,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2000 mm
 (C) Height folded: 1161 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10860 Loading ramp, 2-piece, 2200x900 mm",10860,fordonsmonterad-2-delad-ramp,fordon,10860,"Fordonsmonterad ramp, 2-delad, 2200x900","10860 Loading ramp, 2-piece, 2200x900 mm",2200,900,,,1261,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2200 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10860 Loading ramp, 2-piece, 2200x900 mm",10860,fordonsmonterad-2-delad-ramp,fordon,10860,"Fordonsmonterad ramp, 2-delad, 2200x900","10860 Loading ramp, 2-piece, 2200x900 mm",2200,900,1261,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2200 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1261 mm
 (D) Bredd ramp: 1045 mm
@@ -119,8 +119,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2200 mm
 (C) Height folded: 1261 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10862 Loading ramp, 2-piece, 2400x900 mm",10862,fordonsmonterad-2-delad-ramp,fordon,10862,"Fordonsmonterad ramp, 2-delad, 2400x900","10862 Loading ramp, 2-piece, 2400x900 mm",2400,900,,,1361,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2400 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10862 Loading ramp, 2-piece, 2400x900 mm",10862,fordonsmonterad-2-delad-ramp,fordon,10862,"Fordonsmonterad ramp, 2-delad, 2400x900","10862 Loading ramp, 2-piece, 2400x900 mm",2400,900,1361,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2400 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1361 mm
 (D) Bredd ramp: 1045 mm
@@ -130,8 +130,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2400 mm
 (C) Height folded: 1361 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10871 Loading ramp, 2-piece, 2600x900 mm",10871,fordonsmonterad-2-delad-ramp,fordon,10871,"Fordonsmonterad ramp, 2-delad, 2600x900","10871 Loading ramp, 2-piece, 2600x900 mm",2600,900,,,1461,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2600 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10871 Loading ramp, 2-piece, 2600x900 mm",10871,fordonsmonterad-2-delad-ramp,fordon,10871,"Fordonsmonterad ramp, 2-delad, 2600x900","10871 Loading ramp, 2-piece, 2600x900 mm",2600,900,1461,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2600 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1461 mm
 (D) Bredd ramp: 1045 mm
@@ -141,8 +141,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2600 mm
 (C) Height folded: 1461 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10873 Loading ramp, 2-piece, 2800x900 mm",10873,fordonsmonterad-2-delad-ramp,fordon,10873,"Fordonsmonterad ramp, 2-delad, 2800x900","10873 Loading ramp, 2-piece, 2800x900 mm",2800,900,,,1561,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10873 Loading ramp, 2-piece, 2800x900 mm",10873,fordonsmonterad-2-delad-ramp,fordon,10873,"Fordonsmonterad ramp, 2-delad, 2800x900","10873 Loading ramp, 2-piece, 2800x900 mm",2800,900,1561,400,Totalbredd: 1045 mm | Djup ihopvikt: 241 mm,Total width: 1045 mm | Folded depth: 241 mm,"(A) Längd plattform: 2800 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1561 mm
 (D) Bredd ramp: 1045 mm
@@ -152,8 +152,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2800 mm
 (C) Height folded: 1561 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 241 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
-"10870 Loading ramp, 3-piece, 2500x820 mm",10870,fordonsmonterad-3-delad-ramp,fordon,10870,"Fordonsmonterad ramp, 3-delad, 2500x820","10870 Loading ramp, 3-piece, 2500x820 mm",2500,820,,,961,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 2500 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tvadelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-two-piece
+"10870 Loading ramp, 3-piece, 2500x820 mm",10870,fordonsmonterad-3-delad-ramp,fordon,10870,"Fordonsmonterad ramp, 3-delad, 2500x820","10870 Loading ramp, 3-piece, 2500x820 mm",2500,820,961,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 2500 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 961 mm
 (D) Bredd ramp: 965 mm
@@ -163,8 +163,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2500 mm
 (C) Height folded: 961 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10881 Loading ramp, 3-piece, 2800x820 mm",10881,fordonsmonterad-3-delad-ramp,fordon,10881,"Fordonsmonterad ramp, 3-delad, 2800x820","10881 Loading ramp, 3-piece, 2800x820 mm",2800,820,,,1061,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 2800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10881 Loading ramp, 3-piece, 2800x820 mm",10881,fordonsmonterad-3-delad-ramp,fordon,10881,"Fordonsmonterad ramp, 3-delad, 2800x820","10881 Loading ramp, 3-piece, 2800x820 mm",2800,820,1061,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 2800 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1061 mm
 (D) Bredd ramp: 965 mm
@@ -174,8 +174,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2800 mm
 (C) Height folded: 1061 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10883 Loading ramp, 3-piece, 3100x820 mm",10883,fordonsmonterad-3-delad-ramp,fordon,10883,"Fordonsmonterad ramp, 3-delad, 3100x820","10883 Loading ramp, 3-piece, 3100x820 mm",3100,820,,,1161,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3100 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10883 Loading ramp, 3-piece, 3100x820 mm",10883,fordonsmonterad-3-delad-ramp,fordon,10883,"Fordonsmonterad ramp, 3-delad, 3100x820","10883 Loading ramp, 3-piece, 3100x820 mm",3100,820,1161,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3100 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1161 mm
 (D) Bredd ramp: 965 mm
@@ -185,8 +185,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3100 mm
 (C) Height folded: 1161 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10885 Loading ramp, 3-piece, 3400x820 mm",10885,fordonsmonterad-3-delad-ramp,fordon,10885,"Fordonsmonterad ramp, 3-delad, 3400x820","10885 Loading ramp, 3-piece, 3400x820 mm",3400,820,,,1261,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3400 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10885 Loading ramp, 3-piece, 3400x820 mm",10885,fordonsmonterad-3-delad-ramp,fordon,10885,"Fordonsmonterad ramp, 3-delad, 3400x820","10885 Loading ramp, 3-piece, 3400x820 mm",3400,820,1261,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3400 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1261 mm
 (D) Bredd ramp: 965 mm
@@ -196,8 +196,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3400 mm
 (C) Height folded: 1261 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10887 Loading ramp, 3-piece, 3700x820 mm",10887,fordonsmonterad-3-delad-ramp,fordon,10887,"Fordonsmonterad ramp, 3-delad, 3700x820","10887 Loading ramp, 3-piece, 3700x820 mm",3700,820,,,1361,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3700 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10887 Loading ramp, 3-piece, 3700x820 mm",10887,fordonsmonterad-3-delad-ramp,fordon,10887,"Fordonsmonterad ramp, 3-delad, 3700x820","10887 Loading ramp, 3-piece, 3700x820 mm",3700,820,1361,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 3700 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1361 mm
 (D) Bredd ramp: 965 mm
@@ -207,8 +207,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3700 mm
 (C) Height folded: 1361 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10889 Loading ramp, 3-piece, 4000x820 mm",10889,fordonsmonterad-3-delad-ramp,fordon,10889,"Fordonsmonterad ramp, 3-delad, 4000x820","10889 Loading ramp, 3-piece, 4000x820 mm",4000,820,,,1461,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 4000 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10889 Loading ramp, 3-piece, 4000x820 mm",10889,fordonsmonterad-3-delad-ramp,fordon,10889,"Fordonsmonterad ramp, 3-delad, 4000x820","10889 Loading ramp, 3-piece, 4000x820 mm",4000,820,1461,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 4000 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1461 mm
 (D) Bredd ramp: 965 mm
@@ -218,8 +218,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 4000 mm
 (C) Height folded: 1461 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10891 Loading ramp, 3-piece, 4300x820 mm",10891,fordonsmonterad-3-delad-ramp,fordon,10891,"Fordonsmonterad ramp, 3-delad, 4300x820","10891 Loading ramp, 3-piece, 4300x820 mm",4300,820,,,1561,,400,,,,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 4300 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10891 Loading ramp, 3-piece, 4300x820 mm",10891,fordonsmonterad-3-delad-ramp,fordon,10891,"Fordonsmonterad ramp, 3-delad, 4300x820","10891 Loading ramp, 3-piece, 4300x820 mm",4300,820,1561,400,Totalbredd: 965 mm | Djup ihopvikt: 320 mm,Total width: 965 mm | Folded depth: 320 mm,"(A) Längd plattform: 4300 mm
 (B) Bredd plattform: 820 mm
 (C) Höjd ihopvikt: 1561 mm
 (D) Bredd ramp: 965 mm
@@ -229,8 +229,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2800 mm
 (C) Height folded: 1561 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10869 Loading ramp, 3-piece, 2500x900 mm",10869,fordonsmonterad-3-delad-ramp,fordon,10869,"Fordonsmonterad ramp, 3-delad, 2500x900","10869 Loading ramp, 3-piece, 2500x900 mm",2500,900,,,961,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 2500 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10869 Loading ramp, 3-piece, 2500x900 mm",10869,fordonsmonterad-3-delad-ramp,fordon,10869,"Fordonsmonterad ramp, 3-delad, 2500x900","10869 Loading ramp, 3-piece, 2500x900 mm",2500,900,961,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 2500 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 961 mm
 (D) Bredd ramp: 1045 mm
@@ -240,8 +240,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2500 mm
 (C) Height folded: 961 mm
 (D) Outside width ramp: 965 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10880 Loading ramp, 3-piece, 2800x900 mm",10880,fordonsmonterad-3-delad-ramp,fordon,10880,"Fordonsmonterad ramp, 3-delad, 2800x900","10880 Loading ramp, 3-piece, 2800x900 mm",2800,900,,,1061,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 2800 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10880 Loading ramp, 3-piece, 2800x900 mm",10880,fordonsmonterad-3-delad-ramp,fordon,10880,"Fordonsmonterad ramp, 3-delad, 2800x900","10880 Loading ramp, 3-piece, 2800x900 mm",2800,900,1061,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 2800 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1061 mm
 (D) Bredd ramp: 1045 mm
@@ -251,8 +251,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 2800 mm
 (C) Height folded: 1061 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10882 Loading ramp, 3-piece, 3100x900 mm",10882,fordonsmonterad-3-delad-ramp,fordon,10882,"Fordonsmonterad ramp, 3-delad, 3100x900","10882 Loading ramp, 3-piece, 3100x900 mm",3100,900,,,1161,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3100 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10882 Loading ramp, 3-piece, 3100x900 mm",10882,fordonsmonterad-3-delad-ramp,fordon,10882,"Fordonsmonterad ramp, 3-delad, 3100x900","10882 Loading ramp, 3-piece, 3100x900 mm",3100,900,1161,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3100 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1161 mm
 (D) Bredd ramp: 1045 mm
@@ -262,8 +262,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3100 mm
 (C) Height folded: 1161 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10884 Loading ramp, 3-piece, 3400x900 mm",10884,fordonsmonterad-3-delad-ramp,fordon,10884,"Fordonsmonterad ramp, 3-delad, 3400x900","10884 Loading ramp, 3-piece, 3400x900 mm",3400,900,,,1261,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3400 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10884 Loading ramp, 3-piece, 3400x900 mm",10884,fordonsmonterad-3-delad-ramp,fordon,10884,"Fordonsmonterad ramp, 3-delad, 3400x900","10884 Loading ramp, 3-piece, 3400x900 mm",3400,900,1261,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3400 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1261 mm
 (D) Bredd ramp: 1045 mm
@@ -273,8 +273,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3400 mm
 (C) Height folded: 1261 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10886 Loading ramp, 3-piece, 3700x900 mm",10886,fordonsmonterad-3-delad-ramp,fordon,10886,"Fordonsmonterad ramp, 3-delad, 3700x900","10886 Loading ramp, 3-piece, 3700x900 mm",3700,900,,,1361,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3700 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10886 Loading ramp, 3-piece, 3700x900 mm",10886,fordonsmonterad-3-delad-ramp,fordon,10886,"Fordonsmonterad ramp, 3-delad, 3700x900","10886 Loading ramp, 3-piece, 3700x900 mm",3700,900,1361,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 3700 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1361 mm
 (D) Bredd ramp: 1045 mm
@@ -284,8 +284,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 3700 mm
 (C) Height folded: 1361 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10888 Loading ramp, 3-piece, 4000x900 mm",10888,fordonsmonterad-3-delad-ramp,fordon,10888,"Fordonsmonterad ramp, 3-delad, 4000x900","10888 Loading ramp, 3-piece, 4000x900 mm",4000,900,,,1461,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 4000 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10888 Loading ramp, 3-piece, 4000x900 mm",10888,fordonsmonterad-3-delad-ramp,fordon,10888,"Fordonsmonterad ramp, 3-delad, 4000x900","10888 Loading ramp, 3-piece, 4000x900 mm",4000,900,1461,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 4000 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1461 mm
 (D) Bredd ramp: 1045 mm
@@ -295,8 +295,8 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 4000 mm
 (C) Height folded: 1461 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
-"10890 Loading ramp, 3-piece, 4300x900 mm",10890,fordonsmonterad-3-delad-ramp,fordon,10890,"Fordonsmonterad ramp, 3-delad, 4300x900","10890 Loading ramp, 3-piece, 4300x900 mm",4300,900,,,1561,,400,,,,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 4300 mm
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+"10890 Loading ramp, 3-piece, 4300x900 mm",10890,fordonsmonterad-3-delad-ramp,fordon,10890,"Fordonsmonterad ramp, 3-delad, 4300x900","10890 Loading ramp, 3-piece, 4300x900 mm",4300,900,1561,400,Totalbredd: 1045 mm | Djup ihopvikt: 320 mm,Total width: 1045 mm | Folded depth: 320 mm,"(A) Längd plattform: 4300 mm
 (B) Bredd plattform: 900 mm
 (C) Höjd ihopvikt: 1561 mm
 (D) Bredd ramp: 1045 mm
@@ -306,4 +306,4 @@ Lastvikt/SWL: 400 kg","(A) Platform length: 4300 mm
 (C) Height folded: 1561 mm
 (D) Outside width ramp: 1045 mm
 (E) Depth: 320 mm
-Loading capacity/SWL: 400 kg",,https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece
+Loading capacity/SWL: 400 kg",https://www.feal.se/ramper/fordonsramper/iramp-vehicle-tredelad,https://www.feal.se/ramps/vehicle-ramps/iramp-vehicle-three-piece

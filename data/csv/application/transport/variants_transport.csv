@@ -1,5 +1,5 @@
-Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),inside_width_mm (Plain text),folded_length_mm (Plain text),folded_height_mm (Plain text),weight_kg (Plain text),max_load_kg (Plain text),rec_max_height_mm (Plain text),adjustable_height_mm (Plain text),angle_deg (Plain text),other_specs_sv (Plain text),other_specs_en (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),image (Image),source_url_sv (Link),source_url_en (Link)
-"10922 Loading ramp PRO, 2-piece, 2000x1100 mm",10922,fordonsmonterad-2-delad-lastram,transport,10922,"Fordonsmonterad lastramp, 2-delad, 2000x1100","10922 Loading ramp PRO, 2-piece, 2000x1100 mm",2000,1100,,,1070,39,800,,,,,,"Längd utfälld: 2000 mm
+Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),folded_length_mm (Plain text),folded_height_mm (Plain text),weight_kg (Plain text),max_load_kg (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),source_url_sv (Link),source_url_en (Link)
+"10922 Loading ramp PRO, 2-piece, 2000x1100 mm",10922,fordonsmonterad-2-delad-lastram,transport,10922,"Fordonsmonterad lastramp, 2-delad, 2000x1100","10922 Loading ramp PRO, 2-piece, 2000x1100 mm",2000,1100,,1070,39,800,"Längd utfälld: 2000 mm
 Bredd: 1100 mm
 Höjd hopvikt: 1070 mm
 Vikt: 39 kg
@@ -7,8 +7,8 @@ Maxlast*: 800 kg","Extended length: 2000 mm
 Width: 1100 mm
 Folded height: 1070 mm
 Weight: 39 kg
-Max. load*: 800 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10918 Loading ramp PRO, 2-piece, 2000x900 mm",10918,fordonsmonterad-2-delad-lastram,transport,10918,"Fordonsmonterad lastramp, 2-delad, 2000x900","10918 Loading ramp PRO, 2-piece, 2000x900 mm",2000,900,,,1070,32,800,,,,,,"Längd utfälld: 2000 mm
+Max. load*: 800 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10918 Loading ramp PRO, 2-piece, 2000x900 mm",10918,fordonsmonterad-2-delad-lastram,transport,10918,"Fordonsmonterad lastramp, 2-delad, 2000x900","10918 Loading ramp PRO, 2-piece, 2000x900 mm",2000,900,,1070,32,800,"Längd utfälld: 2000 mm
 Bredd: 900 mm
 Höjd hopvikt: 1070 mm
 Vikt: 32 kg
@@ -16,8 +16,8 @@ Maxlast*: 800 kg","Extended length: 2000 mm
 Width: 900 mm
 Folded height: 1070 mm
 Weight: 32 kg
-Max. load*: 800 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10923 Loading ramp PRO, 2-piece, 2250x1100 mm",10923,fordonsmonterad-2-delad-lastram,transport,10923,"Fordonsmonterad lastramp, 2-delad, 2250x1100","10923 Loading ramp PRO, 2-piece, 2250x1100 mm",2250,1100,,,1190,44,800,,,,,,"Längd utfälld: 2250 mm
+Max. load*: 800 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10923 Loading ramp PRO, 2-piece, 2250x1100 mm",10923,fordonsmonterad-2-delad-lastram,transport,10923,"Fordonsmonterad lastramp, 2-delad, 2250x1100","10923 Loading ramp PRO, 2-piece, 2250x1100 mm",2250,1100,,1190,44,800,"Längd utfälld: 2250 mm
 Bredd: 1100 mm
 Höjd hopvikt: 1190 mm
 Vikt: 44 kg
@@ -25,8 +25,8 @@ Maxlast*: 800 kg","Extended length: 2250 mm
 Width: 1100 mm
 Folded height: 1190 mm
 Weight: 44 kg
-Max. load*: 800 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10919 Loading ramp PRO, 2-piece, 2250x900 mm",10919,fordonsmonterad-2-delad-lastram,transport,10919,"Fordonsmonterad lastramp, 2-delad, 2250x900","10919 Loading ramp PRO, 2-piece, 2250x900 mm",2250,900,,,1190,36,800,,,,,,"Längd utfälld: 2250 mm
+Max. load*: 800 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10919 Loading ramp PRO, 2-piece, 2250x900 mm",10919,fordonsmonterad-2-delad-lastram,transport,10919,"Fordonsmonterad lastramp, 2-delad, 2250x900","10919 Loading ramp PRO, 2-piece, 2250x900 mm",2250,900,,1190,36,800,"Längd utfälld: 2250 mm
 Bredd: 900 mm
 Höjd hopvikt: 1190 mm
 Vikt: 36 kg
@@ -34,8 +34,8 @@ Maxlast*: 800 kg","Extended length: 2250 mm
 Width: 900 mm
 Folded height: 1190 mm
 Weight: 36 kg
-Max. load*: 800 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10924 Loading ramp PRO, 2-piece, 2500x1100 mm",10924,fordonsmonterad-2-delad-lastram,transport,10924,"Fordonsmonterad lastramp, 2-delad, 2500x1100","10924 Loading ramp PRO, 2-piece, 2500x1100 mm",2500,1100,,,1310,49,650,,,,,,"Längd utfälld: 2500 mm
+Max. load*: 800 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10924 Loading ramp PRO, 2-piece, 2500x1100 mm",10924,fordonsmonterad-2-delad-lastram,transport,10924,"Fordonsmonterad lastramp, 2-delad, 2500x1100","10924 Loading ramp PRO, 2-piece, 2500x1100 mm",2500,1100,,1310,49,650,"Längd utfälld: 2500 mm
 Bredd: 1100 mm
 Höjd hopvikt: 1310 mm
 Vikt: 49 kg
@@ -43,8 +43,8 @@ Maxlast*: 650 kg","Extended length: 2500 mm
 Width: 1100 mm
 Folded height: 1310 mm
 Weight: 49 kg
-Max. load*: 650 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10920 Loading ramp PRO, 2-piece, 2500x900 mm",10920,fordonsmonterad-2-delad-lastram,transport,10920,"Fordonsmonterad lastramp, 2-delad, 2500x900","10920 Loading ramp PRO, 2-piece, 2500x900 mm",2500,900,,,1310,40,650,,,,,,"Längd utfälld: 2500 mm
+Max. load*: 650 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10920 Loading ramp PRO, 2-piece, 2500x900 mm",10920,fordonsmonterad-2-delad-lastram,transport,10920,"Fordonsmonterad lastramp, 2-delad, 2500x900","10920 Loading ramp PRO, 2-piece, 2500x900 mm",2500,900,,1310,40,650,"Längd utfälld: 2500 mm
 Bredd: 900 mm
 Höjd hopvikt: 1310 mm
 Vikt: 40 kg
@@ -52,8 +52,8 @@ Maxlast*: 650 kg","Extended length: 2500 mm
 Width: 900 mm
 Folded height: 1310 mm
 Weight: 40 kg
-Max. load*: 650 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10925 Loading ramp PRO, 2-piece, 2850x1100 mm",10925,fordonsmonterad-2-delad-lastram,transport,10925,"Fordonsmonterad lastramp, 2-delad, 2850x1100","10925 Loading ramp PRO, 2-piece, 2850x1100 mm",2850,1100,,,1490,55,650,,,,,,"Längd utfälld: 2850 mm
+Max. load*: 650 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10925 Loading ramp PRO, 2-piece, 2850x1100 mm",10925,fordonsmonterad-2-delad-lastram,transport,10925,"Fordonsmonterad lastramp, 2-delad, 2850x1100","10925 Loading ramp PRO, 2-piece, 2850x1100 mm",2850,1100,,1490,55,650,"Längd utfälld: 2850 mm
 Bredd: 1100 mm
 Höjd hopvikt: 1490 mm
 Vikt: 55 kg
@@ -61,8 +61,8 @@ Maxlast*: 650 kg","Extended length: 2850 mm
 Width: 1100 mm
 Folded height: 1490 mm
 Weight: 55 kg
-Max. load*: 650 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10921 Loading ramp PRO, 2-piece, 2850x900 mm",10921,fordonsmonterad-2-delad-lastram,transport,10921,"Fordonsmonterad lastramp, 2-delad, 2850x900","10921 Loading ramp PRO, 2-piece, 2850x900 mm",2850,900,,,1490,45,650,,,,,,"Längd utfälld: 2850 mm
+Max. load*: 650 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10921 Loading ramp PRO, 2-piece, 2850x900 mm",10921,fordonsmonterad-2-delad-lastram,transport,10921,"Fordonsmonterad lastramp, 2-delad, 2850x900","10921 Loading ramp PRO, 2-piece, 2850x900 mm",2850,900,,1490,45,650,"Längd utfälld: 2850 mm
 Bredd: 900 mm
 Höjd hopvikt: 1490 mm
 Vikt: 45 kg
@@ -70,29 +70,29 @@ Maxlast*: 650 kg","Extended length: 2850 mm
 Width: 900 mm
 Folded height: 1490 mm
 Weight: 45 kg
-Max. load*: 650 kg",,https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
-"10933 PRO, Ramp, Fixed, 1500 mm",10933,portabla-lastskenor,transport,10933,"Portabel lastskena, enkel 1500x270","10933 PRO, Ramp, Fixed, 1500 mm",1500,270,,,,8.4,400,,,,,,"Längd: 1500 mm
+Max. load*: 650 kg",https://www.feal.se/ramper/fordonsramper/lastramper,https://www.feal.se/ramps/vehicle-ramps/loading-ramps
+"10933 PRO, Ramp, Fixed, 1500 mm",10933,portabla-lastskenor,transport,10933,"Portabel lastskena, enkel 1500x270","10933 PRO, Ramp, Fixed, 1500 mm",1500,270,,,8.4,400,"Längd: 1500 mm
 Spårbredd: 270 mm
 Vikt: 8,4 kg
 Maxlast: 400 kg","Length: 1500/59 mm/in
 Track width: 270/11
 Weight: 8,4/15,4 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
-"10934 PRO, Ramp, Fixed, 2000 mm",10934,portabla-lastskenor,transport,10934,"Portabel lastskena, enkel, 2000x270","10934 PRO, Ramp, Fixed, 2000 mm",2000,270,,,,10.6,400,,,,,,"Längd: 2000 mm
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+"10934 PRO, Ramp, Fixed, 2000 mm",10934,portabla-lastskenor,transport,10934,"Portabel lastskena, enkel, 2000x270","10934 PRO, Ramp, Fixed, 2000 mm",2000,270,,,10.6,400,"Längd: 2000 mm
 Spårbredd: 270 mm
 Vikt: 10,6 kg
 Maxlast: 400 kg","Length: 2000/79 mm/in
 Track width: 270/11
 Weight: 10,6/19,8 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
-"10935 PRO, Ramp, Fixed, 2500 mm",10935,portabla-lastskenor,transport,10935,"Portabel lastskena, enkel, 2500x270","10935 PRO, Ramp, Fixed, 2500 mm",2500,270,,,,13,400,,,,,,"Längd: 2500 mm
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+"10935 PRO, Ramp, Fixed, 2500 mm",10935,portabla-lastskenor,transport,10935,"Portabel lastskena, enkel, 2500x270","10935 PRO, Ramp, Fixed, 2500 mm",2500,270,,,13,400,"Längd: 2500 mm
 Spårbredd: 270 mm
 Vikt: 13 kg
 Maxlast: 400 kg","Length: 2500/98 mm/in
 Track width: 270/11
 Weight: 13/24,2 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
-"10936 PRO, Ramp, Foldable, 1500 mm",10936,portabla-lastskenor,transport,10936,"Portabel lastskena, 2-delad vikbar, 1500x","10936 PRO, Ramp, Foldable, 1500 mm",2200,270,,750,,7.5,400,,,,,,"Längd: 1500 mm
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+"10936 PRO, Ramp, Foldable, 1500 mm",10936,portabla-lastskenor,transport,10936,"Portabel lastskena, 2-delad vikbar, 1500x","10936 PRO, Ramp, Foldable, 1500 mm",2200,270,750,,7.5,400,"Längd: 1500 mm
 Spårbredd: 270 mm
 Längd ihopvikt: 750 mm
 Vikt: 7,5 kg
@@ -100,8 +100,8 @@ Maxlast: 400 kg","Length: 1500/59 mm/in
 Track width: 270/11 mm/in
 Folded length: 750/30 mm/in
 Weight: 7,5/17,6 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
-"10937 PRO, Ramp, Foldable, 2000 mm",10937,portabla-lastskenor,transport,10937,"Portabel lastskena, 2-delad vikbar, 2000x","10937 PRO, Ramp, Foldable, 2000 mm",2400,270,,1000,,10,400,,,,,,"Längd: 2000 mm
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+"10937 PRO, Ramp, Foldable, 2000 mm",10937,portabla-lastskenor,transport,10937,"Portabel lastskena, 2-delad vikbar, 2000x","10937 PRO, Ramp, Foldable, 2000 mm",2400,270,1000,,10,400,"Längd: 2000 mm
 Spårbredd: 270 mm
 Längd ihopvikt: 1000 mm
 Vikt: 10 kg
@@ -109,8 +109,8 @@ Maxlast: 400 kg","Length: 2000/79 mm/in
 Track width: 270/11 mm/in
 Folded length: 100/40 mm/in
 Weight: 10/22,0 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
-"10938 PRO, Ramp, Foldable, 2500 mm",10938,portabla-lastskenor,transport,10938,"Portabel lastskena, 2-delad vikbar, 2500x","10938 PRO, Ramp, Foldable, 2500 mm",2600,270,,1250,,13,400,,,,,,"Längd: 2500 mm
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+"10938 PRO, Ramp, Foldable, 2500 mm",10938,portabla-lastskenor,transport,10938,"Portabel lastskena, 2-delad vikbar, 2500x","10938 PRO, Ramp, Foldable, 2500 mm",2600,270,1250,,13,400,"Längd: 2500 mm
 Spårbredd: 270 mm
 Längd ihopvikt: 1250 mm
 Vikt: 13 kg
@@ -118,4 +118,4 @@ Maxlast: 400 kg","Length: 2500/98 mm/in
 Track width: 270/11 mm/in
 Folded length: 125/49 mm/in
 Weight:13/26,4 kg/lb
-Max. load: 400/880 kg/lb",,https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails
+Max. load: 400/880 kg/lb",https://www.feal.se/ramper/portabla-ramper/lastskenor,https://www.feal.se/ramps/portable-ramps/loading-rails

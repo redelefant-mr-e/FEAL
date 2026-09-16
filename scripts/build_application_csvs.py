@@ -370,13 +370,37 @@ def build_product_row(
     return row
 
 
-def write_csv(path: Path, rows: list[dict[str, str]], fieldnames: list[str]) -> None:
+def prune_empty_columns(
+    rows: list[dict[str, str]], fieldnames: list[str]
+) -> list[str]:
+    """Keep only columns that have at least one non-empty value (plus Title/Slug)."""
+    keep: list[str] = []
+    for col in fieldnames:
+        if col in ("Title", "Slug"):
+            keep.append(col)
+            continue
+        if any((r.get(col) or "").strip() for r in rows):
+            keep.append(col)
+    return keep
+
+
+def write_csv(
+    path: Path,
+    rows: list[dict[str, str]],
+    fieldnames: list[str],
+    *,
+    drop_empty: bool = False,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    cols = prune_empty_columns(rows, fieldnames) if drop_empty else fieldnames
+    dropped = [c for c in fieldnames if c not in cols]
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        writer = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")
         writer.writeheader()
         for row in rows:
-            writer.writerow({k: row.get(k, "") for k in fieldnames})
+            writer.writerow({k: row.get(k, "") for k in cols})
+    if drop_empty and dropped:
+        print(f"  pruned {len(dropped)} empty columns from {path.name}")
 
 
 def run() -> None:
@@ -452,8 +476,18 @@ def run() -> None:
                 )
 
         cat_dir = OUT_DIR / app["key"]
-        write_csv(cat_dir / f"products_{app['key']}.csv", product_rows, APP_PRODUCT_FIELDS)
-        write_csv(cat_dir / f"variants_{app['key']}.csv", variant_rows, VARIANT_FIELDS)
+        write_csv(
+            cat_dir / f"products_{app['key']}.csv",
+            product_rows,
+            APP_PRODUCT_FIELDS,
+            drop_empty=True,
+        )
+        write_csv(
+            cat_dir / f"variants_{app['key']}.csv",
+            variant_rows,
+            VARIANT_FIELDS,
+            drop_empty=True,
+        )
         print(
             f"  Wrote {len(product_rows)} products, {len(variant_rows)} variants → {cat_dir}"
         )
