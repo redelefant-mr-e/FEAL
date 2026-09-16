@@ -727,6 +727,8 @@ def normalize_rich_text(text: str) -> str:
     Hard breaks (two trailing spaces) add vertical gap where paragraph spacing
     is unsupported — but must NOT follow list items (those become empty bullets).
     Quote attributions like "- Name, role" become an em-dash line, not a list.
+    Short consecutive feature blurbs are grouped into bullet lists so they
+    don't float as orphaned one-liners.
     """
     if not text or not text.strip():
         return ""
@@ -759,6 +761,17 @@ def normalize_rich_text(text: str) -> str:
     def ends_with_quote(line: str) -> bool:
         return bool(re.search(r'["\u201d\u2019»]$', line.rstrip()))
 
+    def is_short_blurb(line: str) -> bool:
+        s = line.strip()
+        if not s or is_heading(s) or is_list_item(s):
+            return False
+        if s.startswith("— "):
+            return False
+        # Feature-like short/medium one-paragraph blurbs
+        if len(s) > 220:
+            return False
+        return True
+
     HARD = "  "  # Markdown hard line break — never after list items
 
     # Pre-pass: quote attributions must not be list items
@@ -774,6 +787,28 @@ def normalize_rich_text(text: str) -> str:
         fixed.append(line)
     lines = fixed
 
+    # Group consecutive short blurbs into a bullet list (keeps a long intro paragraph)
+    grouped: list[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if is_short_blurb(line):
+            run = [line]
+            j = i + 1
+            while j < len(lines) and is_short_blurb(lines[j]):
+                run.append(lines[j])
+                j += 1
+            if len(run) >= 2:
+                if grouped and grouped[-1].strip():
+                    grouped.append("")
+                for item in run:
+                    grouped.append(f"- {item}")
+                i = j
+                continue
+        grouped.append(line)
+        i += 1
+    lines = grouped
+
     out: list[str] = []
     for i, line in enumerate(lines):
         prev = out[-1] if out else None
@@ -782,7 +817,6 @@ def normalize_rich_text(text: str) -> str:
         # Space ABOVE heading
         if is_heading(line) and out and prev_bare not in (None, ""):
             if is_list_item(prev_bare):
-                # Close the list with real blank lines (hard breaks → empty bullets)
                 out.append("")
                 out.append("")
             else:
@@ -791,7 +825,7 @@ def normalize_rich_text(text: str) -> str:
                 out.append(HARD)
                 out.append(HARD)
 
-        # Gap between prose paragraphs
+        # Gap between prose paragraphs (not list items)
         if (
             prev_bare
             and prev_bare != ""
