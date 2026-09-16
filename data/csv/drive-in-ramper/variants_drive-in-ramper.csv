@@ -1,4 +1,4 @@
-Title,Slug,product_slug,category_key,article_number,name_sv,name_en,length_mm,width_mm,inside_width_mm,folded_length_mm,folded_height_mm,weight_kg,max_load_kg,rec_max_height_mm,adjustable_height_mm,angle_deg,other_specs_sv,other_specs_en,specs_raw_sv,specs_raw_en,image,source_url_sv,source_url_en
+Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),inside_width_mm (Plain text),folded_length_mm (Plain text),folded_height_mm (Plain text),weight_kg (Plain text),max_load_kg (Plain text),rec_max_height_mm (Plain text),adjustable_height_mm (Plain text),angle_deg (Plain text),other_specs_sv (Plain text),other_specs_en (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),image (Image),source_url_sv (Link),source_url_en (Link)
 "10718 Threshold ramp with safety edges, 400x750 mm",10718,drive-in-ramper,drive-in-ramper,10718,"10718 Tröskelramp med avåkningsskydd, 400x750 mm","10718 Threshold ramp with safety edges, 400x750 mm",400,750,,,,3,300,,,,,,"Längd: 400 mm
 Bredd: 750 mm
 Vikt: 3 kg

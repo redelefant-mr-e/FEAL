@@ -68,13 +68,13 @@ After a fresh scrape, either re-run `host_images.py` for new assets, or rely on 
 
 1. Export is already UTF-8 CSV with required **`Title`** and **`Slug`** columns.
 2. In a Figma Sites file: **CMS → Add collection → Import CSV**.
-3. Map fields:
-   - `Title` → Title
-   - `Slug` → Slug
-   - `image_1`…`image_8` / `image` → **Image** (jsDelivr HTTPS URLs after `host_images.py`)
-   - `source_url_sv` / `source_url_en` → Link
-   - descriptions / features → Rich text or Plain text
-   - remaining columns → Plain text
+3. Map fields using the type hint in each column header:
+   - `Title` / `Slug` → Title / Slug (required; names must stay exact)
+   - `… (Plain text)` → Plain text
+   - `… (Rich text)` → Rich text
+   - `… (Image)` → Image
+   - `… (Link)` → Link
+   - Example: `description_sv (Rich text)`, `image_1 (Image)`, `source_url_en (Link)`
 4. Limits while in beta: ≤200 items and ≤100 fields per collection (these exports are under both).
 5. Import products and variants as **separate collections** per category (or one products + one variants collection per category file pair).
 

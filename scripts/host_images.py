@@ -30,7 +30,7 @@ JPEG_QUALITY = 82
 REQUEST_DELAY_S = 0.2
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; FEAL-image-host/1.0)"}
 
-IMAGE_COL_RE = re.compile(r"^image(_\d+)?$", re.I)
+IMAGE_COL_RE = re.compile(r"^image(_\d+)?(\s|\(|$)", re.I)
 FILENAME_RE = re.compile(r"/([^/]+)\.(jpe?g|png|gif)(?:\?|$)", re.I)
 
 

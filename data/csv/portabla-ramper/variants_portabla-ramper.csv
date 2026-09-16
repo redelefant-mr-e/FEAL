@@ -1,4 +1,4 @@
-Title,Slug,product_slug,category_key,article_number,name_sv,name_en,length_mm,width_mm,inside_width_mm,folded_length_mm,folded_height_mm,weight_kg,max_load_kg,rec_max_height_mm,adjustable_height_mm,angle_deg,other_specs_sv,other_specs_en,specs_raw_sv,specs_raw_en,image,source_url_sv,source_url_en
+Title,Slug,product_slug (Plain text),category_key (Plain text),article_number (Plain text),name_sv (Plain text),name_en (Plain text),length_mm (Plain text),width_mm (Plain text),inside_width_mm (Plain text),folded_length_mm (Plain text),folded_height_mm (Plain text),weight_kg (Plain text),max_load_kg (Plain text),rec_max_height_mm (Plain text),adjustable_height_mm (Plain text),angle_deg (Plain text),other_specs_sv (Plain text),other_specs_en (Plain text),specs_raw_sv (Rich text),specs_raw_en (Rich text),image (Image),source_url_sv (Link),source_url_en (Link)
 "11068 Channel ramp, Fixed, 550x210 mm",11068,fasta-ramper,portabla-ramper,11068,"11068 Ramp, 550x210 mm","11068 Channel ramp, Fixed, 550x210 mm",550,,210,,,1.5,200,100,,,,,"Längd: 550 mm
 Bredd insida: 210 mm
 Vikt: 1,5 kg
