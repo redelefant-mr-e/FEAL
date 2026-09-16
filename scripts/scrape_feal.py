@@ -448,7 +448,8 @@ class PageLangData:
     url: str = ""
 
 
-IMAGE_SLOT_COUNT = 8
+# Enough for the richest product pages (system ramps ~22 images).
+IMAGE_SLOT_COUNT = 24
 
 
 def image_asset_key(url: str) -> str:
@@ -743,24 +744,20 @@ def extract_page_body(soup: BeautifulSoup) -> str:
                 continue
             objects.append(obj)
 
-        stop_surface = False
         for obj in objects:
             md = _block_markdown(obj)
             if md is None:
                 continue
             if md == "__STOP__":
-                stop_surface = True
-                break
+                # Skip SKU / model-list blocks but keep scanning — footnotes and
+                # later captions can appear after the variant grid.
+                continue
             # Deduplicate near-identical blocks
             norm = re.sub(r"\s+", " ", md).strip().lower()
             if norm in seen_norm:
                 continue
             seen_norm.add(norm)
             parts.append(md)
-
-        if stop_surface:
-            # Do not process later model surfaces
-            break
 
     # Join and tidy (collapse whitespace-only lines from empty CMS nodes)
     body = "\n\n".join(parts)
