@@ -720,6 +720,89 @@ def _block_markdown(obj: Tag) -> str | None:
     return text
 
 
+def normalize_rich_text(text: str) -> str:
+    """
+    Beautify Markdown rich text for Figma: blank lines after headings,
+    between paragraphs, and between feature sections.
+    """
+    if not text or not text.strip():
+        return ""
+
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    lines = [ln.rstrip() for ln in text.split("\n")]
+
+    def is_heading(line: str) -> bool:
+        return bool(re.match(r"^#{1,6}\s+\S", line))
+
+    def is_list_item(line: str) -> bool:
+        return bool(re.match(r"^(\s*[-*+]|\s*\d+\.)\s+", line))
+
+    def ends_sentence(line: str) -> bool:
+        s = line.rstrip()
+        if not s or is_heading(s) or is_list_item(s):
+            return False
+        return bool(re.search(r'[.!?…]"?$|[.”]$|[.»]$', s))
+
+    def starts_paragraph(line: str) -> bool:
+        s = line.lstrip()
+        if not s or is_heading(s) or is_list_item(s):
+            return False
+        # Capital letter, opening quote, or Swedish/typographic quote
+        return bool(re.match(r'^[A-ZÅÄÖÉÜÍ"«„‟]', s))
+
+    out: list[str] = []
+    for i, line in enumerate(lines):
+        prev = out[-1] if out else None
+
+        # Blank line before heading (when previous was non-empty non-heading)
+        if is_heading(line) and prev is not None and prev != "":
+            if not is_heading(prev):
+                out.append("")
+
+        # Blank line between prose paragraphs joined by a single newline
+        if (
+            prev
+            and prev != ""
+            and line
+            and not is_heading(prev)
+            and not is_heading(line)
+            and not is_list_item(prev)
+            and not is_list_item(line)
+            and ends_sentence(prev)
+            and starts_paragraph(line)
+        ):
+            out.append("")
+
+        out.append(line)
+
+        # Blank line after heading before following non-empty body
+        if is_heading(line):
+            nxt = lines[i + 1] if i + 1 < len(lines) else None
+            if nxt is not None and nxt != "" and not is_heading(nxt):
+                # Only insert if next emitted won't already be blank
+                out.append("")
+
+    # Collapse 3+ blank lines to a single blank (i.e. max one empty line)
+    collapsed: list[str] = []
+    blank_run = 0
+    for line in out:
+        if line == "":
+            blank_run += 1
+            if blank_run <= 1:
+                collapsed.append("")
+        else:
+            blank_run = 0
+            collapsed.append(line)
+
+    # Trim leading/trailing blank lines
+    while collapsed and collapsed[0] == "":
+        collapsed.pop(0)
+    while collapsed and collapsed[-1] == "":
+        collapsed.pop()
+
+    return "\n".join(collapsed)
+
+
 def extract_page_body(soup: BeautifulSoup) -> str:
     """
     Full on-page narrative as Markdown (SV or EN page).
@@ -763,7 +846,7 @@ def extract_page_body(soup: BeautifulSoup) -> str:
     body = "\n\n".join(parts)
     body = re.sub(r"[ \t]+\n", "\n", body)
     body = re.sub(r"\n{3,}", "\n\n", body).strip()
-    return body
+    return normalize_rich_text(body)
 
 
 def extract_features(soup: BeautifulSoup) -> str:
@@ -788,10 +871,10 @@ def extract_features(soup: BeautifulSoup) -> str:
                 body = t
                 break
         if body:
-            blocks.append(f"### {title}\n{body}")
+            blocks.append(f"### {title}\n\n{body}")
         else:
             blocks.append(f"### {title}")
-    return "\n\n".join(blocks)
+    return normalize_rich_text("\n\n".join(blocks))
 
 
 def extract_intro(soup: BeautifulSoup) -> tuple[str, str]:

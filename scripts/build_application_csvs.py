@@ -16,7 +16,7 @@ from typing import Any
 
 import openpyxl
 
-from scripts.scrape_feal import IMAGE_SLOT_COUNT, VARIANT_FIELDS
+from scripts.scrape_feal import IMAGE_SLOT_COUNT, VARIANT_FIELDS, normalize_rich_text
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCEL_DIR = ROOT / "OneDrive_1_16.9.2026"
@@ -350,10 +350,18 @@ def build_product_row(
         "article_numbers (Plain text)": ", ".join(article_numbers),
         "overview_sv (Plain text)": old.get("overview_sv (Plain text)", ""),
         "overview_en (Plain text)": old.get("overview_en (Plain text)", ""),
-        "description_sv (Rich text)": old.get("description_sv (Rich text)", ""),
-        "description_en (Rich text)": old.get("description_en (Rich text)", ""),
-        "features_sv (Rich text)": old.get("features_sv (Rich text)", ""),
-        "features_en (Rich text)": old.get("features_en (Rich text)", ""),
+        "description_sv (Rich text)": normalize_rich_text(
+            old.get("description_sv (Rich text)", "")
+        ),
+        "description_en (Rich text)": normalize_rich_text(
+            old.get("description_en (Rich text)", "")
+        ),
+        "features_sv (Rich text)": normalize_rich_text(
+            old.get("features_sv (Rich text)", "")
+        ),
+        "features_en (Rich text)": normalize_rich_text(
+            old.get("features_en (Rich text)", "")
+        ),
         "source_url_sv (Link)": old.get("source_url_sv (Link)", ""),
         "source_url_en (Link)": old.get("source_url_en (Link)", ""),
         "parent_page_sv (Plain text)": old.get("parent_page_sv (Plain text)", ""),
