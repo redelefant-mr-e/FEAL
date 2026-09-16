@@ -1,10 +1,33 @@
-# FEAL variant picker (Figma Sites embed)
+# FEAL embeds (Figma Sites)
+
+## Global site chrome (all pages)
+
+Smooth same-origin page fade + mobile menu reset when a nav link leaves an open menu.
+
+Add **once** under **Site settings → Custom code → end of `<body>`**:
+
+```html
+<script
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/site-chrome.js?v=2"
+  defer
+></script>
+```
+
+- **Page transition:** fades `html` on internal link clicks (`View Transitions` when available). Honors `prefers-reduced-motion`.
+- **Menu reset:** if `stäng` / `close` is present, closes the menu, waits briefly for Figma’s boolean to update, then navigates. On the next page, retries close if the open state hydrates late. Does not open the menu; does not touch other UI.
+- **Richtext headings:** `div.root h1–h6` get a little vertical margin (`1.25em` top / `0.75em` bottom; no top margin if the heading is first in the block).
+
+> **Cache note:** bump `?v=` after updates (jsDelivr caches `@main`).
+
+---
+
+## Variant picker (product pages)
 
 Small embeddable size selector for application product pages. It reads the page
 slug, loads variants from static JSON, and mirrors the Style Guide
 `embed-feature` UI (dropdown → specs → Offertförfrågan mailto).
 
-## Drop into Figma Sites
+### Drop into Figma Sites
 
 On each product page (or the CMS product template), add a **Custom code / Embed** block:
 
@@ -95,6 +118,7 @@ cd embed && python3 -m http.server 8765
 
 | File | Role |
 |---|---|
+| `site-chrome.js` | Global page fade, mobile menu close, richtext heading margins |
 | `variant-picker.js` | Mount, slug/lang, UI, mailto |
 | `variant-picker.css` | Figma Style Guide tokens |
 | `data/variants.json` | Application variants keyed by `product_slug` |
