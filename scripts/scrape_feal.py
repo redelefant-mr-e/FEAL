@@ -722,17 +722,16 @@ def _block_markdown(obj: Tag) -> str | None:
 
 def normalize_rich_text(text: str) -> str:
     """
-    Beautify Markdown rich text: blank lines after headings and between paragraphs.
+    Beautify Markdown rich text for Figma Sites CMS.
 
-    Figma Sites CMS beta does not support paragraph spacing on rich text styles.
-    Soft/hard line breaks (Shift+Enter in the editor) are the practical workaround;
-    in Markdown that is two trailing spaces before a newline.
+    Hard breaks (two trailing spaces) add vertical gap where paragraph spacing
+    is unsupported — but must NOT follow list items (those become empty bullets).
+    Quote attributions like "- Name, role" become an em-dash line, not a list.
     """
     if not text or not text.strip():
         return ""
 
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-    # Drop failed spacer experiments so re-normalize is idempotent
     spacer_re = re.compile(
         r"^(?:\u00a0|&nbsp;|<br\s*/?\s*>(?:\s*<br\s*/?\s*>)?|\s*)$",
         re.I,
@@ -743,7 +742,7 @@ def normalize_rich_text(text: str) -> str:
         return bool(re.match(r"^#{1,6}\s+\S", line))
 
     def is_list_item(line: str) -> bool:
-        return bool(re.match(r"^(\s*[-*+]|\s*\d+\.)\s+", line))
+        return bool(re.match(r"^(\s*[-*+]|\s*\d+\.)\s+\S", line))
 
     def ends_sentence(line: str) -> bool:
         s = line.rstrip()
@@ -757,23 +756,38 @@ def normalize_rich_text(text: str) -> str:
             return False
         return bool(re.match(r'^[A-ZÅÄÖÉÜÍ"«„‟]', s))
 
-    HARD = "  "  # Markdown hard line break (Shift+Enter equivalent)
+    def ends_with_quote(line: str) -> bool:
+        return bool(re.search(r'["""»]$', line.rstrip()))
+
+    HARD = "  "  # Markdown hard line break — never after list items
+
+    # Pre-pass: quote attributions must not be list items
+    fixed: list[str] = []
+    for i, line in enumerate(lines):
+        prev = fixed[-1] if fixed else ""
+        if re.match(r"^[-*+]\s+\S", line) and ends_with_quote(prev) and "," in line:
+            line = "— " + re.sub(r"^[-*+]\s+", "", line)
+        fixed.append(line)
+    lines = fixed
 
     out: list[str] = []
     for i, line in enumerate(lines):
         prev = out[-1] if out else None
         prev_bare = prev.rstrip() if prev is not None else None
 
-        # Space ABOVE heading ≈ two Shift+Enter breaks (Figma quirk: these create gap)
-        if is_heading(line) and out:
-            if prev_bare not in (None, ""):
-                # Ensure previous content line ends with a hard break, then two empty hard-breaks
+        # Space ABOVE heading
+        if is_heading(line) and out and prev_bare not in (None, ""):
+            if is_list_item(prev_bare):
+                # Close the list with real blank lines (hard breaks → empty bullets)
+                out.append("")
+                out.append("")
+            else:
                 if not prev.endswith(HARD):
                     out[-1] = prev_bare + HARD
                 out.append(HARD)
                 out.append(HARD)
 
-        # Blank line between prose paragraphs joined by a single newline
+        # Gap between prose paragraphs
         if (
             prev_bare
             and prev_bare != ""
@@ -789,21 +803,31 @@ def normalize_rich_text(text: str) -> str:
                 out[-1] = prev_bare + HARD
             out.append(HARD)
 
+        # Blank line before a list that follows prose
+        if (
+            is_list_item(line)
+            and prev_bare
+            and prev_bare != ""
+            and not is_list_item(prev_bare)
+            and not is_heading(prev_bare)
+        ):
+            out.append("")
+
         out.append(line)
 
-        # After heading: hard break then blank structure before body
+        # After heading before body
         if is_heading(line):
             nxt = lines[i + 1] if i + 1 < len(lines) else None
             if nxt is not None and nxt != "" and not is_heading(nxt):
-                out.append(HARD)
+                out.append("" if is_list_item(nxt) else HARD)
 
-    # Trim leading/trailing hard-break-only / empty lines
     while out and out[0].strip() == "":
         out.pop(0)
     while out and out[-1].strip() == "":
         out.pop()
 
     return "\n".join(out)
+
 
 
 def extract_page_body(soup: BeautifulSoup) -> str:
