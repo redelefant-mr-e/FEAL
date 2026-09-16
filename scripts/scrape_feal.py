@@ -726,6 +726,8 @@ def normalize_rich_text(text: str) -> str:
 
     Hard breaks (two trailing spaces) add vertical gap where paragraph spacing
     is unsupported — but must NOT follow list items (those become empty bullets).
+    Figma also cannot space list → heading without empty bullets, so any list
+    immediately before a heading is demoted to spaced prose.
     Quote attributions like "- Name, role" become an em-dash line, not a list.
     Short feature blurbs after a section intro become a bullet list; intros,
     quotes, and CTAs stay as prose.
@@ -748,14 +750,11 @@ def normalize_rich_text(text: str) -> str:
         re.I,
     )
 
-    lines = [
-        ln.rstrip()
-        for ln in text.split("\n")
-        if not spacer_re.match(ln.rstrip())
-        and ln.rstrip().replace("\u200b", "").strip() != ""
-    ]
+    lines = [ln.rstrip() for ln in text.split("\n") if not spacer_re.match(ln.rstrip())]
     # Drop model-grid width headers that leaked into narrative
     lines = [ln for ln in lines if not width_group_re.match(ln.strip())]
+    # Drop previous ZWSP list-exit experiments
+    lines = [ln for ln in lines if ln.replace("\u200b", "").strip() != ""]
 
     def is_heading(line: str) -> bool:
         return bool(re.match(r"^#{1,6}\s+\S", line))
@@ -797,10 +796,6 @@ def normalize_rich_text(text: str) -> str:
         return True
 
     HARD = "  "  # Markdown hard line break — never after list items
-    # Non-list spacer paragraph: blank lines after lists collapse in Figma, and
-    # HARD directly after a list item becomes an empty bullet. A ZWSP line exits
-    # the list so following hard breaks create real vertical gap before a heading.
-    LIST_EXIT = "\u200b"
 
     # Pre-pass: quote attributions must not be list items
     fixed: list[str] = []
@@ -865,14 +860,19 @@ def normalize_rich_text(text: str) -> str:
             i += 1
             continue
 
-        # Subsequent short feature blurbs → bullets (2+)
+        # Subsequent short feature blurbs → bullets (2+), unless a heading follows
+        # (Figma cannot put space between a list and the next heading cleanly).
         if is_feature_blurb(line):
             run = [line]
             j = i + 1
             while j < len(lines) and is_feature_blurb(lines[j]):
                 run.append(lines[j])
                 j += 1
-            if len(run) >= 2:
+            k = j
+            while k < len(lines) and not lines[k].strip():
+                k += 1
+            heading_follows = k < len(lines) and is_heading(lines[k])
+            if len(run) >= 2 and not heading_follows:
                 if grouped and grouped[-1].strip():
                     grouped.append("")
                 for item in run:
@@ -885,23 +885,37 @@ def normalize_rich_text(text: str) -> str:
         i += 1
     lines = grouped
 
+    # Demote any list that sits immediately before a heading → spaced prose.
+    demoted: list[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if is_list_item(line):
+            j = i
+            while j < len(lines) and is_list_item(lines[j]):
+                j += 1
+            k = j
+            while k < len(lines) and not lines[k].strip():
+                k += 1
+            if k < len(lines) and is_heading(lines[k]):
+                for item in lines[i:j]:
+                    demoted.append(re.sub(r"^(\s*[-*+]|\s*\d+\.)\s+", "", item).strip())
+                i = j
+                continue
+        demoted.append(line)
+        i += 1
+    lines = demoted
+
     out: list[str] = []
     for i, line in enumerate(lines):
         prev = out[-1] if out else None
         prev_bare = prev.rstrip() if prev is not None else None
 
-        # Space ABOVE heading
+        # Space ABOVE heading (prose only — never after list items)
         if is_heading(line) and out and prev_bare not in (None, ""):
             if is_list_item(prev_bare):
-                # Exit list, then hard-break gap (blank lines alone collapse)
-                out.append(LIST_EXIT + HARD)
-                out.append(HARD)
-                out.append(HARD)
-            elif prev_bare == LIST_EXIT or prev_bare == "":
-                if prev is not None and prev_bare == LIST_EXIT and not prev.endswith(HARD):
-                    out[-1] = LIST_EXIT + HARD
-                out.append(HARD)
-                out.append(HARD)
+                # Should be rare after demote; keep flush to avoid empty bullets
+                out.append("")
             else:
                 if not prev.endswith(HARD):
                     out[-1] = prev_bare + HARD
@@ -923,6 +937,23 @@ def normalize_rich_text(text: str) -> str:
             if prev is not None and not prev.endswith(HARD):
                 out[-1] = prev_bare + HARD
             out.append(HARD)
+
+        # Demoted short blurbs (no terminal punctuation) still need separation
+        elif (
+            prev_bare
+            and prev_bare != ""
+            and line
+            and not is_heading(prev_bare)
+            and not is_heading(line)
+            and not is_list_item(prev_bare)
+            and not is_list_item(line)
+            and not ends_sentence(prev_bare)
+            and starts_paragraph(line)
+            and len(prev_bare) < 220
+            and not prev_bare.startswith("— ")
+        ):
+            if prev is not None and not prev.endswith(HARD):
+                out[-1] = prev_bare + HARD
 
         # Blank line before a list that follows prose
         if (
