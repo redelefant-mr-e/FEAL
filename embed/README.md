@@ -43,6 +43,14 @@ Language: `data-lang="sv|en"` (default `sv`). If omitted, paths containing `/en/
 | `data-lang` | `sv` or `en` |
 | `data-variants-url` | Alternate JSON URL (defaults to sibling `data/variants.json`) |
 
+### Embed height (Figma Sites)
+
+Sites embeds are usually a **fixed height** and do not auto-grow with content.
+
+- Size the embed for the **selected** state (dropdown + specs + button): about **560px** tall (and full content width, ~616px+).
+- The open size list is an **overlay** (does not grow the page), so you do not need extra height for long variant lists.
+- If anything still clips, give the embed `overflow: visible` if Sites allows it, or bump height slightly.
+
 ## Quote button
 
 `mailto:order@feal.se` with subject/body including the **selected variant name**

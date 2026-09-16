@@ -62,6 +62,7 @@
   gap: var(--space-xs);
   width: 100%;
   position: relative;
+  z-index: 2;
 }
 
 .feal-vp__label {
@@ -77,9 +78,10 @@
 
 .feal-vp__select {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-m);
   width: 100%;
+  min-height: 48px;
   padding: var(--space-s);
   background: var(--color-sand-20);
   border: 1px solid var(--color-border-strong);
@@ -87,6 +89,7 @@
   text-align: left;
   font: inherit;
   color: inherit;
+  position: relative;
 }
 
 .feal-vp__select-value {
@@ -101,15 +104,23 @@
 
 .feal-vp__select-list {
   display: none;
-  flex: 1 0 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 1px);
+  z-index: 5;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-m);
-  min-width: 0;
   margin: 0;
-  padding: 0;
+  padding: var(--space-s);
   list-style: none;
+  background: #ffffff;
+  border: 1px solid var(--color-border-strong);
+  border-top: 0;
+  max-height: min(360px, 50vh);
+  overflow-y: auto;
 }
 
 .feal-vp__select-list button {
@@ -142,7 +153,6 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  margin-top: 2px;
   transition: transform 0.15s ease;
 }
 
@@ -150,10 +160,6 @@
   display: block;
   width: 16px;
   height: 16px;
-}
-
-.feal-vp.is-open .feal-vp__select-value {
-  display: none;
 }
 
 .feal-vp.is-open .feal-vp__select-list {
@@ -240,6 +246,7 @@
   height: 44px;
   align-items: center;
   overflow: hidden;
+  margin-top: var(--space-xs);
 }
 
 .feal-vp__button {
