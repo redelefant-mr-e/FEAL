@@ -30,8 +30,16 @@ JPEG_QUALITY = 82
 REQUEST_DELAY_S = 0.2
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; FEAL-image-host/1.0)"}
 
+# Product CSVs use image_N (Image); team CSV uses photo (Image).
 IMAGE_COL_RE = re.compile(r"^image(_\d+)?(\s|\(|$)", re.I)
+IMAGE_HINT_RE = re.compile(r"\(Image\)", re.I)
 FILENAME_RE = re.compile(r"/([^/]+)\.(jpe?g|png|gif)(?:\?|$)", re.I)
+
+
+def is_image_column(name: str | None) -> bool:
+    if not name:
+        return False
+    return bool(IMAGE_COL_RE.match(name) or IMAGE_HINT_RE.search(name))
 
 
 def detect_github_repo() -> str:
@@ -68,7 +76,7 @@ def collect_image_urls() -> set[str]:
                 continue
             for row in reader:
                 for key, value in row.items():
-                    if not value or not IMAGE_COL_RE.match(key or ""):
+                    if not value or not is_image_column(key):
                         continue
                     value = value.strip()
                     if value.startswith("http"):
@@ -169,7 +177,7 @@ def rewrite_csvs(url_map: dict[str, str]) -> int:
         dirty = False
         for row in rows:
             for key in fieldnames:
-                if not IMAGE_COL_RE.match(key or ""):
+                if not is_image_column(key):
                     continue
                 old = (row.get(key) or "").strip()
                 if old in url_map and row[key] != url_map[old]:
