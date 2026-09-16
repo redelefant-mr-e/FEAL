@@ -727,8 +727,8 @@ def normalize_rich_text(text: str) -> str:
     Hard breaks (two trailing spaces) add vertical gap where paragraph spacing
     is unsupported — but must NOT follow list items (those become empty bullets).
     Quote attributions like "- Name, role" become an em-dash line, not a list.
-    Short consecutive feature blurbs are grouped into bullet lists so they
-    don't float as orphaned one-liners.
+    Short feature blurbs after a section intro become a bullet list; intros,
+    quotes, and CTAs stay as prose.
     """
     if not text or not text.strip():
         return ""
@@ -738,7 +738,19 @@ def normalize_rich_text(text: str) -> str:
         r"^(?:\u00a0|&nbsp;|<br\s*/?\s*>(?:\s*<br\s*/?\s*>)?|\s*)$",
         re.I,
     )
+    width_group_re = re.compile(
+        r"^\d+\s*mm\s+(width|bredd)\b",
+        re.I,
+    )
+    cta_re = re.compile(
+        r"^(kontakta\b|behöver du\b|need a\b|looking for\b|contact us\b|"
+        r"upptäck\b|our pro-models\b|discover\b)",
+        re.I,
+    )
+
     lines = [ln.rstrip() for ln in text.split("\n") if not spacer_re.match(ln.rstrip())]
+    # Drop model-grid width headers that leaked into narrative
+    lines = [ln for ln in lines if not width_group_re.match(ln.strip())]
 
     def is_heading(line: str) -> bool:
         return bool(re.match(r"^#{1,6}\s+\S", line))
@@ -761,14 +773,21 @@ def normalize_rich_text(text: str) -> str:
     def ends_with_quote(line: str) -> bool:
         return bool(re.search(r'["\u201d\u2019»]$', line.rstrip()))
 
-    def is_short_blurb(line: str) -> bool:
+    def is_quote_line(line: str) -> bool:
         s = line.strip()
-        if not s or is_heading(s) or is_list_item(s):
+        return bool(s) and (s[0] in "\"\"\"«„" or s.startswith("\u201c") or s.startswith("\u201d"))
+
+    def is_feature_blurb(line: str) -> bool:
+        """Short feature-like line eligible for bullet grouping (not intros/CTAs/quotes)."""
+        s = line.strip()
+        if not s or is_heading(s) or is_list_item(s) or s.startswith("— "):
             return False
-        if s.startswith("— "):
+        if is_quote_line(s) or cta_re.match(s):
             return False
-        # Feature-like short/medium one-paragraph blurbs
-        if len(s) > 220:
+        if len(s) > 200:
+            return False
+        # Footnotes
+        if s.startswith("*"):
             return False
         return True
 
@@ -784,28 +803,76 @@ def normalize_rich_text(text: str) -> str:
                 break
         if re.match(r"^[-*+]\s+\S", line) and ends_with_quote(prev) and "," in line:
             line = "— " + re.sub(r"^[-*+]\s+", "", line)
+        # Footnote markers as plain prose
+        if re.match(r"^\*\s+\S", line):
+            line = re.sub(r"^\*\s+", "", line)
         fixed.append(line)
     lines = fixed
 
-    # Group consecutive short blurbs into a bullet list (keeps a long intro paragraph)
+    # Undo previous over-aggressive bulletting of whole descriptions:
+    # if a list item is clearly a long intro / CTA, convert back to prose first.
+    unbulleted: list[str] = []
+    for line in lines:
+        if is_list_item(line):
+            body = re.sub(r"^(\s*[-*+]|\s*\d+\.)\s+", "", line).strip()
+            if (
+                len(body) > 200
+                or cta_re.match(body)
+                or is_quote_line(body)
+            ):
+                unbulleted.append(body)
+                continue
+        unbulleted.append(line)
+    lines = unbulleted
+
+    # Group feature blurbs after a section intro into a bullet list.
+    # Never bullet the first content block after a heading / document start.
     grouped: list[str] = []
     i = 0
+    seen_prose_in_section = False
     while i < len(lines):
         line = lines[i]
-        if is_short_blurb(line):
+        if is_heading(line):
+            seen_prose_in_section = False
+            grouped.append(line)
+            i += 1
+            continue
+
+        if not line.strip():
+            grouped.append(line)
+            i += 1
+            continue
+
+        if is_list_item(line) or line.strip().startswith("— "):
+            seen_prose_in_section = True
+            grouped.append(line)
+            i += 1
+            continue
+
+        # First prose block in a section stays prose
+        if not seen_prose_in_section:
+            grouped.append(line)
+            seen_prose_in_section = True
+            i += 1
+            continue
+
+        # Subsequent short feature blurbs → bullets (2+)
+        if is_feature_blurb(line):
             run = [line]
             j = i + 1
-            while j < len(lines) and is_short_blurb(lines[j]):
+            while j < len(lines) and is_feature_blurb(lines[j]):
                 run.append(lines[j])
                 j += 1
             if len(run) >= 2:
                 if grouped and grouped[-1].strip():
                     grouped.append("")
                 for item in run:
-                    grouped.append(f"- {item}")
+                    grouped.append(f"- {item.strip()}")
                 i = j
                 continue
+
         grouped.append(line)
+        seen_prose_in_section = True
         i += 1
     lines = grouped
 
