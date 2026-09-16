@@ -757,14 +757,18 @@ def normalize_rich_text(text: str) -> str:
         return bool(re.match(r'^[A-ZÅÄÖÉÜÍ"«„‟]', s))
 
     def ends_with_quote(line: str) -> bool:
-        return bool(re.search(r'["""»]$', line.rstrip()))
+        return bool(re.search(r'["\u201d\u2019»]$', line.rstrip()))
 
     HARD = "  "  # Markdown hard line break — never after list items
 
     # Pre-pass: quote attributions must not be list items
     fixed: list[str] = []
     for i, line in enumerate(lines):
-        prev = fixed[-1] if fixed else ""
+        prev = ""
+        for j in range(len(fixed) - 1, -1, -1):
+            if fixed[j].strip():
+                prev = fixed[j]
+                break
         if re.match(r"^[-*+]\s+\S", line) and ends_with_quote(prev) and "," in line:
             line = "— " + re.sub(r"^[-*+]\s+", "", line)
         fixed.append(line)
