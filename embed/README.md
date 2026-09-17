@@ -34,7 +34,7 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260917a"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260917b"
   defer
 ></script>
 ```
@@ -75,7 +75,7 @@ Language (first match wins):
 
 Sites embeds are usually a **fixed height** and do not auto-grow with content.
 
-- Size the embed for the **selected** state (dropdown + specs + button): about **560px** tall (and full content width, ~616px+).
+- Size the embed for the **selected** state (dropdown + specs + button): about **500px** tall (and full content width, ~616px+).
 - The open size list is an **overlay** (does not grow the page), so you do not need extra height for long variant lists.
 - If anything still clips, give the embed `overflow: visible` if Sites allows it, or bump height slightly.
 

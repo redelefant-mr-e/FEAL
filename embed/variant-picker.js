@@ -9,7 +9,7 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260917a";
+  var ASSET_VERSION = "20260917b";
 
   var I18N = {
     sv: {
@@ -257,10 +257,6 @@
     dropdown.appendChild(label);
     dropdown.appendChild(selectBtn);
 
-    var divider = document.createElement("div");
-    divider.className = "feal-vp__divider";
-    divider.hidden = true;
-
     var variantBlock = document.createElement("div");
     variantBlock.className = "feal-vp__variant";
     variantBlock.setAttribute("aria-live", "polite");
@@ -274,7 +270,6 @@
     actions.appendChild(quoteBtn);
 
     root.appendChild(dropdown);
-    root.appendChild(divider);
     root.appendChild(variantBlock);
     root.appendChild(actions);
     mount.appendChild(root);
@@ -293,7 +288,6 @@
       selectedIndex = index;
       var variant = variants[index];
       mount.classList.add("has-selection");
-      divider.hidden = false;
       valueEl.textContent = sizeLabel(variant);
 
       list.querySelectorAll("button").forEach(function (btn, i) {
