@@ -9,7 +9,7 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260916c";
+  var ASSET_VERSION = "20260917a";
 
   var I18N = {
     sv: {
@@ -90,8 +90,24 @@
     if (attr === "en" || attr === "sv") return attr;
     var fromQuery = (qs("lang") || "").toLowerCase();
     if (fromQuery === "en" || fromQuery === "sv") return fromQuery;
+
+    // Path: /en/… or any segment starting with en- (e.g. /en-portabla-ramper-produkt/…)
     var path = (window.location.pathname || "").toLowerCase();
     if (/(^|\/)en(\/|$)/.test(path)) return "en";
+    var segments = path.split("/").filter(Boolean);
+    for (var i = 0; i < segments.length; i++) {
+      if (segments[i] === "en" || segments[i].indexOf("en-") === 0) return "en";
+    }
+
+    // Figma Sites page Language → usually <html lang="en">
+    try {
+      var htmlLang = (
+        document.documentElement.getAttribute("lang") ||
+        ""
+      ).toLowerCase();
+      if (htmlLang === "en" || htmlLang.indexOf("en-") === 0) return "en";
+    } catch (e) {}
+
     return "sv";
   }
 

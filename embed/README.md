@@ -32,21 +32,17 @@ slug, loads variants from static JSON, and mirrors the Style Guide
 On each product page (or the CMS product template), add a **Custom code / Embed** block:
 
 ```html
-<div id="feal-variant-picker" data-lang="sv"></div>
+<div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260916c"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260917a"
   defer
 ></script>
 ```
 
-English pages:
+Optional override if auto-detect is wrong:
 
 ```html
 <div id="feal-variant-picker" data-lang="en"></div>
-<script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260916c"
-  defer
-></script>
 ```
 
 > **Cache note:** jsDelivr caches `@main` aggressively (up to 7 days). After updates, bump the `?v=` query, or purge:  
@@ -59,7 +55,13 @@ English pages:
 3. Else last path segment of `window.location.pathname`  
    e.g. `/fordonsmonterad-2-delad-ramp` → `fordonsmonterad-2-delad-ramp`
 
-Language: `data-lang="sv|en"` (default `sv`). If omitted, paths containing `/en/` use English.
+Language (first match wins):
+
+1. `data-lang="sv|en"` on the mount node
+2. `?lang=sv|en` query param
+3. Path segment `/en/` **or** a slug starting with `en-` (e.g. `/en-portabla-ramper-produkt/…`)
+4. `<html lang="en">` (Figma Sites **Language** page setting)
+5. Default: `sv`
 
 ### Optional attributes
 
