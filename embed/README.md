@@ -34,7 +34,7 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918b"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918c"
   defer
 ></script>
 ```
@@ -117,6 +117,16 @@ PYTHONPATH=. python3 scripts/build_variant_embed_data.py
 ```
 
 Also runs automatically at the end of `scripts/build_application_csvs.py`.
+
+## Audit live product slugs
+
+Check that every linked product page on the Figma Sites preview resolves to a catalog key (including aliases):
+
+```bash
+PYTHONPATH=. python3 scripts/audit_variant_product_slugs.py
+```
+
+If anything is `MISS`, add it to `SLUG_ALIASES` in `scripts/build_variant_embed_data.py` and rebuild.
 
 ## Local preview
 

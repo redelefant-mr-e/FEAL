@@ -9,7 +9,7 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260918b";
+  var ASSET_VERSION = "20260918c";
 
   var I18N = {
     sv: {
@@ -362,7 +362,7 @@
     var dataUrl =
       mount.getAttribute(DATA_URL_ATTR) ||
       qs("variantsUrl") ||
-      base + "data/variants.json";
+      base + "data/variants.json?v=" + ASSET_VERSION;
 
     fetchJson(dataUrl)
       .then(function (catalog) {
