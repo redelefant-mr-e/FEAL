@@ -9,11 +9,12 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260918d";
+  var ASSET_VERSION = "20260918e";
 
   var I18N = {
     sv: {
       sizeLabel: "Storlek (Längd x Bredd)",
+      articleNumber: "Art.nr:",
       length: "Längd:",
       width: "Bredd åkyta:",
       foldedHeight: "Höjd ihopvikt:",
@@ -35,6 +36,7 @@
     },
     en: {
       sizeLabel: "Size (Length x Width)",
+      articleNumber: "Art. no:",
       length: "Length:",
       width: "Riding surface width:",
       foldedHeight: "Folded height:",
@@ -152,8 +154,20 @@
     return variant.article_number || variant.slug || "";
   }
 
+  function stripLeadingArticleNumber(name, articleNumber) {
+    if (!name) return "";
+    if (!articleNumber) return String(name).trim();
+    var escaped = String(articleNumber).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return String(name)
+      .replace(new RegExp("^" + escaped + "\\s*[,:\\-–]?\\s*", "i"), "")
+      .trim();
+  }
+
   function displayName(variant, lang) {
-    return (lang === "en" ? variant.name_en : variant.name_sv) || sizeLabel(variant);
+    var raw =
+      (lang === "en" ? variant.name_en : variant.name_sv) || sizeLabel(variant);
+    var cleaned = stripLeadingArticleNumber(raw, variant.article_number);
+    return cleaned || raw || sizeLabel(variant);
   }
 
   function formatMm(value, t) {
@@ -331,6 +345,18 @@
     // Design Step 1 = closed empty-ish; we use placeholder until pick.
   }
 
+  function appendSpecRow(container, label, value) {
+    if (!value) return;
+    var lab = document.createElement("p");
+    lab.className = "feal-vp__spec-label";
+    lab.textContent = label;
+    var val = document.createElement("p");
+    val.className = "feal-vp__spec-value";
+    val.textContent = value;
+    container.appendChild(lab);
+    container.appendChild(val);
+  }
+
   function renderVariantDetails(container, variant, lang, t) {
     container.innerHTML = "";
 
@@ -339,19 +365,15 @@
     title.textContent = displayName(variant, lang);
     container.appendChild(title);
 
+    if (variant.article_number) {
+      appendSpecRow(container, t.articleNumber, String(variant.article_number));
+    }
+
     SPEC_FIELDS.forEach(function (field) {
       var raw = variant[field.key];
       var value =
         field.format === "kg" ? formatKg(raw, t) : formatMm(raw, t);
-      if (!value) return;
-      var lab = document.createElement("p");
-      lab.className = "feal-vp__spec-label";
-      lab.textContent = t[field.labelKey];
-      var val = document.createElement("p");
-      val.className = "feal-vp__spec-value";
-      val.textContent = value;
-      container.appendChild(lab);
-      container.appendChild(val);
+      appendSpecRow(container, t[field.labelKey], value);
     });
 
     var footnote = (lang === "en" ? variant.footnote_en : variant.footnote_sv) || "";

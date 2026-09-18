@@ -73,9 +73,9 @@ article_number,application,new_product_slug,excel_sheet,excel_name_sv,old_produc
 10933,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, enkel 1500x270",lastskenor,portabla-ramper,matched
 10934,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, enkel, 2000x270",lastskenor,portabla-ramper,matched
 10935,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, enkel, 2500x270",lastskenor,portabla-ramper,matched
-10936,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 1500x",lastskenor,portabla-ramper,matched
-10937,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 2000x",lastskenor,portabla-ramper,matched
-10938,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 2500x",lastskenor,portabla-ramper,matched
+10936,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 1500x270",lastskenor,portabla-ramper,matched
+10937,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 2000x270",lastskenor,portabla-ramper,matched
+10938,transport,portabla-lastskenor,Portabla Lastskenor,"Portabel lastskena, 2-delad vikbar, 2500x270",lastskenor,portabla-ramper,matched
 10910,transport,,,,lastramper,fordonsramper,excluded_not_in_excel
 10911,transport,,,,lastramper,fordonsramper,excluded_not_in_excel
 10912,transport,,,,lastramper,fordonsramper,excluded_not_in_excel

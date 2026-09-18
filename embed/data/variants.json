@@ -722,7 +722,7 @@
       {
         "article_number": "10933",
         "name_sv": "Portabel lastskena, enkel 1500x270",
-        "name_en": "10933 PRO, Ramp, Fixed, 1500 mm",
+        "name_en": "Loading Channel ramps, single-piece, 1500x270",
         "slug": "10933",
         "length_mm": "1500",
         "width_mm": "270",
@@ -740,7 +740,7 @@
       {
         "article_number": "10934",
         "name_sv": "Portabel lastskena, enkel, 2000x270",
-        "name_en": "10934 PRO, Ramp, Fixed, 2000 mm",
+        "name_en": "Loading Channel ramps, single-piece, 2000x270",
         "slug": "10934",
         "length_mm": "2000",
         "width_mm": "270",
@@ -757,8 +757,8 @@
       },
       {
         "article_number": "10936",
-        "name_sv": "Portabel lastskena, 2-delad vikbar, 1500x",
-        "name_en": "10936 PRO, Ramp, Foldable, 1500 mm",
+        "name_sv": "Portabel lastskena, 2-delad vikbar, 1500x270",
+        "name_en": "Loading Channel ramps, 2-piece foldable, 1500x270",
         "slug": "10936",
         "length_mm": "2200",
         "width_mm": "270",
@@ -775,8 +775,8 @@
       },
       {
         "article_number": "10937",
-        "name_sv": "Portabel lastskena, 2-delad vikbar, 2000x",
-        "name_en": "10937 PRO, Ramp, Foldable, 2000 mm",
+        "name_sv": "Portabel lastskena, 2-delad vikbar, 2000x270",
+        "name_en": "Loading Channel ramps, 2-piece foldable, 2000x270",
         "slug": "10937",
         "length_mm": "2400",
         "width_mm": "270",
@@ -811,8 +811,8 @@
       },
       {
         "article_number": "10938",
-        "name_sv": "Portabel lastskena, 2-delad vikbar, 2500x",
-        "name_en": "10938 PRO, Ramp, Foldable, 2500 mm",
+        "name_sv": "Portabel lastskena, 2-delad vikbar, 2500x270",
+        "name_en": "Loading Channel ramps, 2-piece foldable, 2500x270",
         "slug": "10938",
         "length_mm": "2600",
         "width_mm": "270",
@@ -1105,7 +1105,7 @@
         "total_width_mm": null,
         "inside_width_mm": "170",
         "weight_kg": "8.2",
-        "max_load_kg": "120",
+        "max_load_kg": "125",
         "rec_max_height_mm": "600",
         "category_key": "portable"
       }
@@ -1417,7 +1417,7 @@
         "length_mm": "2950",
         "width_mm": "250",
         "folded_height_mm": null,
-        "folded_length_mm": "10800",
+        "folded_length_mm": "1080",
         "folded_width_mm": null,
         "folded_depth_mm": null,
         "total_width_mm": null,
@@ -1955,7 +1955,7 @@
         "length_mm": "2950",
         "width_mm": "250",
         "folded_height_mm": null,
-        "folded_length_mm": "10800",
+        "folded_length_mm": "1080",
         "folded_width_mm": null,
         "folded_depth_mm": null,
         "total_width_mm": null,
