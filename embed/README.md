@@ -34,7 +34,7 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918a"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918b"
   defer
 ></script>
 ```
@@ -63,6 +63,7 @@ Prefer CMS **Slug** values that match catalog keys in `embed/data/variants.json`
 |---|---|
 | `fast-skena` | `enkelskena` |
 | `fordonsmonterade-2-delade-ramper` | `fordonsmonterad-2-delad-ramp` |
+| `fordonsmonterad-2-delad-lastramp` | `fordonsmonterad-2-delad-lastram` |
 | `teleskopisk-vikbar-skena` | `vikbar-teleskopisk-skena` |
 
 Language (first match wins):

@@ -9,7 +9,7 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260918a";
+  var ASSET_VERSION = "20260918b";
 
   var I18N = {
     sv: {

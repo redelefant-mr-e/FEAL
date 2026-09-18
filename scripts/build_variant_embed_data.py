@@ -21,6 +21,7 @@ APPS = ("fordon", "portable", "transport")
 SLUG_ALIASES: dict[str, str] = {
     "fast-skena": "enkelskena",
     "fordonsmonterade-2-delade-ramper": "fordonsmonterad-2-delad-ramp",
+    "fordonsmonterad-2-delad-lastramp": "fordonsmonterad-2-delad-lastram",
     "teleskopisk-vikbar-skena": "vikbar-teleskopisk-skena",
 }
 

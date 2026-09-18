@@ -1247,6 +1247,130 @@
       }
     ]
   },
+  "fordonsmonterad-2-delad-lastramp": {
+    "variants": [
+      {
+        "article_number": "10918",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2000x900",
+        "name_en": "10918 Loading ramp PRO, 2-piece, 2000x900 mm",
+        "slug": "10918",
+        "length_mm": "2000",
+        "width_mm": "900",
+        "folded_height_mm": "1070",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "32",
+        "max_load_kg": "800",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10922",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2000x1100",
+        "name_en": "10922 Loading ramp PRO, 2-piece, 2000x1100 mm",
+        "slug": "10922",
+        "length_mm": "2000",
+        "width_mm": "1100",
+        "folded_height_mm": "1070",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "39",
+        "max_load_kg": "800",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10919",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2250x900",
+        "name_en": "10919 Loading ramp PRO, 2-piece, 2250x900 mm",
+        "slug": "10919",
+        "length_mm": "2250",
+        "width_mm": "900",
+        "folded_height_mm": "1190",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "36",
+        "max_load_kg": "800",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10923",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2250x1100",
+        "name_en": "10923 Loading ramp PRO, 2-piece, 2250x1100 mm",
+        "slug": "10923",
+        "length_mm": "2250",
+        "width_mm": "1100",
+        "folded_height_mm": "1190",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "44",
+        "max_load_kg": "800",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10920",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2500x900",
+        "name_en": "10920 Loading ramp PRO, 2-piece, 2500x900 mm",
+        "slug": "10920",
+        "length_mm": "2500",
+        "width_mm": "900",
+        "folded_height_mm": "1310",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "40",
+        "max_load_kg": "650",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10924",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2500x1100",
+        "name_en": "10924 Loading ramp PRO, 2-piece, 2500x1100 mm",
+        "slug": "10924",
+        "length_mm": "2500",
+        "width_mm": "1100",
+        "folded_height_mm": "1310",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "49",
+        "max_load_kg": "650",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10921",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2850x900",
+        "name_en": "10921 Loading ramp PRO, 2-piece, 2850x900 mm",
+        "slug": "10921",
+        "length_mm": "2850",
+        "width_mm": "900",
+        "folded_height_mm": "1490",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "45",
+        "max_load_kg": "650",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      },
+      {
+        "article_number": "10925",
+        "name_sv": "Fordonsmonterad lastramp, 2-delad, 2850x1100",
+        "name_en": "10925 Loading ramp PRO, 2-piece, 2850x1100 mm",
+        "slug": "10925",
+        "length_mm": "2850",
+        "width_mm": "1100",
+        "folded_height_mm": "1490",
+        "folded_length_mm": null,
+        "inside_width_mm": null,
+        "weight_kg": "55",
+        "max_load_kg": "650",
+        "rec_max_height_mm": null,
+        "category_key": "transport"
+      }
+    ]
+  },
   "fordonsmonterade-2-delade-ramper": {
     "variants": [
       {
