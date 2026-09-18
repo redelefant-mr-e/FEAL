@@ -34,7 +34,7 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918c"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918d"
   defer
 ></script>
 ```
@@ -65,6 +65,24 @@ Prefer CMS **Slug** values that match catalog keys in `embed/data/variants.json`
 | `fordonsmonterade-2-delade-ramper` | `fordonsmonterad-2-delad-ramp` |
 | `fordonsmonterad-2-delad-lastramp` | `fordonsmonterad-2-delad-lastram` |
 | `teleskopisk-vikbar-skena` | `vikbar-teleskopisk-skena` |
+
+### CMS variant tables (Figma Sites)
+
+Variant measure columns come from the Excel sources in `OneDrive_1_16.9.2026/` and differ by collection:
+
+| Collection CSV | Typical Excel headers (beyond Artikelnummer / Namn) |
+|---|---|
+| `data/csv/application/fordon/variants_fordon.csv` | Längd, Bredd åkyta, Höjd ihopvikt, **Totalbredd**, **Djup ihopvikt**, Lastvikt/SWL |
+| `data/csv/application/portable/variants_portable.csv` | Längd, Bredd åkyta, Längd/Bredd ihopvikt (where relevant), Vikt, Lastvikt/SWL, Rek. Maxhöjd |
+| `data/csv/application/transport/variants_transport.csv` | Längd, Bredd åkyta, Höjd/Längd ihopvikt, Vikt, Lastvikt/SWL |
+
+After rebuilding CSVs:
+
+1. Re-import the updated `variants_*.csv` into each Figma CMS collection (add any new fields such as `total_width_mm`, `folded_depth_mm`, `folded_width_mm`).
+2. On **fordonsmonterade** product tables, bind **Totalbredd** + **Djup ihopvikt** — do **not** bind **Vikt** (not in that Excel).
+3. Keep portable/transport tables on their own Excel headers.
+
+The embed picker only shows non-empty measures for the selected variant (same source fields).
 
 Language (first match wins):
 

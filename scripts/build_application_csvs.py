@@ -242,25 +242,32 @@ def parse_workbook(path: Path) -> list[dict[str, Any]]:
 def merge_other_specs(
     scraped_sv: str,
     scraped_en: str,
-    excel_extra: dict[str, str],
 ) -> tuple[str, str]:
-    parts_sv: list[str] = []
-    parts_en: list[str] = []
-    if scraped_sv:
-        parts_sv.append(scraped_sv)
-    if scraped_en:
-        parts_en.append(scraped_en)
-    labels = {
-        "total_width_mm": ("Totalbredd", "Total width"),
-        "folded_depth_mm": ("Djup ihopvikt", "Folded depth"),
-        "folded_width_mm": ("Bredd ihopvikt", "Folded width"),
-    }
-    for key, (sv_l, en_l) in labels.items():
-        val = excel_extra.get(key, "")
-        if val:
-            parts_sv.append(f"{sv_l}: {val} mm")
-            parts_en.append(f"{en_l}: {val} mm")
-    return " | ".join(parts_sv), " | ".join(parts_en)
+    """Keep scraped extras only — Excel measures live in dedicated columns now."""
+    return clean(scraped_sv), clean(scraped_en)
+
+
+def strip_promoted_specs(text: str) -> str:
+    """Remove Totalbredd / Djup ihopvikt / Bredd ihopvikt segments now stored as columns."""
+    if not text:
+        return ""
+    parts = [p.strip() for p in text.split("|")]
+    drop_prefixes = (
+        "totalbredd:",
+        "total width:",
+        "djup ihopvikt:",
+        "folded depth:",
+        "bredd ihopvikt:",
+        "folded width:",
+    )
+    kept: list[str] = []
+    for part in parts:
+        low = part.lower()
+        if any(low.startswith(prefix) for prefix in drop_prefixes):
+            continue
+        if part:
+            kept.append(part)
+    return " | ".join(kept)
 
 
 def build_variant_row(
@@ -279,13 +286,8 @@ def build_variant_row(
         return excel_v.get(excel_key) or old.get(csv_key, "") or ""
 
     other_sv, other_en = merge_other_specs(
-        old.get("other_specs_sv (Plain text)", ""),
-        old.get("other_specs_en (Plain text)", ""),
-        {
-            "total_width_mm": excel_v.get("total_width_mm", ""),
-            "folded_depth_mm": excel_v.get("folded_depth_mm", ""),
-            "folded_width_mm": excel_v.get("folded_width_mm", ""),
-        },
+        strip_promoted_specs(old.get("other_specs_sv (Plain text)", "")),
+        strip_promoted_specs(old.get("other_specs_en (Plain text)", "")),
     )
 
     # Prefer Excel measures when present; keep scraped for remaining fields
@@ -305,6 +307,15 @@ def build_variant_row(
         ),
         "folded_height_mm (Plain text)": pick(
             "folded_height_mm", "folded_height_mm (Plain text)"
+        ),
+        "folded_width_mm (Plain text)": pick(
+            "folded_width_mm", "folded_width_mm (Plain text)"
+        ),
+        "folded_depth_mm (Plain text)": pick(
+            "folded_depth_mm", "folded_depth_mm (Plain text)"
+        ),
+        "total_width_mm (Plain text)": pick(
+            "total_width_mm", "total_width_mm (Plain text)"
         ),
         "weight_kg (Plain text)": pick("weight_kg", "weight_kg (Plain text)"),
         "max_load_kg (Plain text)": pick("max_load_kg", "max_load_kg (Plain text)"),

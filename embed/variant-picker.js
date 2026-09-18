@@ -9,16 +9,21 @@
   var MAILTO = "order@feal.se";
   var DATA_URL_ATTR = "data-variants-url";
   // Bump when CSS/JS change so Sites/jsDelivr clients don't keep a stale stylesheet
-  var ASSET_VERSION = "20260918c";
+  var ASSET_VERSION = "20260918d";
 
   var I18N = {
     sv: {
       sizeLabel: "Storlek (Längd x Bredd)",
-      length: "Längd utfälld:",
-      width: "Bredd:",
-      foldedHeight: "Höjd hopvikt:",
+      length: "Längd:",
+      width: "Bredd åkyta:",
+      foldedHeight: "Höjd ihopvikt:",
+      foldedLength: "Längd ihopvikt:",
+      foldedWidth: "Bredd ihopvikt:",
+      foldedDepth: "Djup ihopvikt:",
+      totalWidth: "Totalbredd:",
       weight: "Vikt:",
-      maxLoad: "Maxlast*:",
+      maxLoad: "Lastvikt/SWL:",
+      recMaxHeight: "Rek. Maxhöjd:",
       quote: "Offertförfrågan",
       placeholder: "Välj storlek",
       missingProduct: "Ingen produkt hittades för den här sidan.",
@@ -30,11 +35,16 @@
     },
     en: {
       sizeLabel: "Size (Length x Width)",
-      length: "Length unfolded:",
-      width: "Width:",
+      length: "Length:",
+      width: "Riding surface width:",
       foldedHeight: "Folded height:",
+      foldedLength: "Folded length:",
+      foldedWidth: "Folded width:",
+      foldedDepth: "Folded depth:",
+      totalWidth: "Total width:",
       weight: "Weight:",
-      maxLoad: "Max load*:",
+      maxLoad: "Load capacity/SWL:",
+      recMaxHeight: "Rec. max height:",
       quote: "Request a quote",
       placeholder: "Select size",
       missingProduct: "No product found for this page.",
@@ -45,6 +55,20 @@
       unitKg: " kg",
     },
   };
+
+  // Spec rows follow Excel column order; only non-empty values render.
+  var SPEC_FIELDS = [
+    { key: "length_mm", labelKey: "length", format: "mm" },
+    { key: "width_mm", labelKey: "width", format: "mm" },
+    { key: "folded_height_mm", labelKey: "foldedHeight", format: "mm" },
+    { key: "total_width_mm", labelKey: "totalWidth", format: "mm" },
+    { key: "folded_depth_mm", labelKey: "foldedDepth", format: "mm" },
+    { key: "folded_length_mm", labelKey: "foldedLength", format: "mm" },
+    { key: "folded_width_mm", labelKey: "foldedWidth", format: "mm" },
+    { key: "weight_kg", labelKey: "weight", format: "kg" },
+    { key: "max_load_kg", labelKey: "maxLoad", format: "kg" },
+    { key: "rec_max_height_mm", labelKey: "recMaxHeight", format: "mm" },
+  ];
 
   function scriptBaseUrl() {
     var scripts = document.getElementsByTagName("script");
@@ -315,22 +339,17 @@
     title.textContent = displayName(variant, lang);
     container.appendChild(title);
 
-    var rows = [
-      { label: t.length, value: formatMm(variant.length_mm, t) },
-      { label: t.width, value: formatMm(variant.width_mm, t) },
-      { label: t.foldedHeight, value: formatMm(variant.folded_height_mm, t) },
-      { label: t.weight, value: formatKg(variant.weight_kg, t) },
-      { label: t.maxLoad, value: formatKg(variant.max_load_kg, t) },
-    ];
-
-    rows.forEach(function (row) {
-      if (!row.value) return;
+    SPEC_FIELDS.forEach(function (field) {
+      var raw = variant[field.key];
+      var value =
+        field.format === "kg" ? formatKg(raw, t) : formatMm(raw, t);
+      if (!value) return;
       var lab = document.createElement("p");
       lab.className = "feal-vp__spec-label";
-      lab.textContent = row.label;
+      lab.textContent = t[field.labelKey];
       var val = document.createElement("p");
       val.className = "feal-vp__spec-value";
-      val.textContent = row.value;
+      val.textContent = value;
       container.appendChild(lab);
       container.appendChild(val);
     });
