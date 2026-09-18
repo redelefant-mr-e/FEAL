@@ -16,6 +16,14 @@ OUT_PATH = ROOT / "embed" / "data" / "variants.json"
 
 APPS = ("fordon", "portable", "transport")
 
+# Live Figma Sites CMS slugs that differ from catalog product_slug keys.
+# Written as extra top-level keys pointing at the same variant arrays.
+SLUG_ALIASES: dict[str, str] = {
+    "fast-skena": "enkelskena",
+    "fordonsmonterade-2-delade-ramper": "fordonsmonterad-2-delad-ramp",
+    "teleskopisk-vikbar-skena": "vikbar-teleskopisk-skena",
+}
+
 METRIC_KEYS = (
     "length_mm",
     "width_mm",
@@ -78,6 +86,17 @@ def build() -> dict:
             )
         )
         out[product_slug] = {"variants": variants}
+
+    for alias, canonical in sorted(SLUG_ALIASES.items()):
+        if canonical not in out:
+            raise KeyError(
+                f"Alias {alias!r} targets missing product_slug {canonical!r}"
+            )
+        if alias in out and alias != canonical:
+            raise ValueError(
+                f"Alias {alias!r} collides with an existing product_slug"
+            )
+        out[alias] = out[canonical]
     return out
 
 
@@ -97,8 +116,12 @@ def main() -> None:
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    n_var = sum(len(p["variants"]) for p in data.values())
-    print(f"Wrote {len(data)} products, {n_var} variants → {OUT_PATH}")
+    canonical = {k for k in data if k not in SLUG_ALIASES}
+    n_var = sum(len(data[k]["variants"]) for k in canonical)
+    print(
+        f"Wrote {len(canonical)} products (+{len(SLUG_ALIASES)} aliases), "
+        f"{n_var} variants → {OUT_PATH}"
+    )
 
 
 if __name__ == "__main__":

@@ -34,12 +34,14 @@ On each product page (or the CMS product template), add a **Custom code / Embed*
 ```html
 <div id="feal-variant-picker"></div>
 <script
-  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260917b"
+  src="https://cdn.jsdelivr.net/gh/redelefant-mr-e/FEAL@main/embed/variant-picker.js?v=20260918a"
   defer
 ></script>
 ```
 
-Optional override if auto-detect is wrong:
+**Important (CMS template):** do **not** hardcode `data-product` on the shared product template (e.g. `data-product="enkelskena"`). That forces every product page to the same sizes. Leave the mount empty and let the URL slug resolve the product. Only set `data-product` for a one-off override on a single page.
+
+Optional language override if auto-detect is wrong:
 
 ```html
 <div id="feal-variant-picker" data-lang="en"></div>
@@ -50,10 +52,18 @@ Optional override if auto-detect is wrong:
 
 ### How the product is resolved
 
-1. `data-product="fordonsmonterad-2-delad-ramp"` on the mount node (optional override)
+1. `data-product="fordonsmonterad-2-delad-ramp"` on the mount node (optional override — not for templates)
 2. Else `?product=…` query param
 3. Else last path segment of `window.location.pathname`  
-   e.g. `/fordonsmonterad-2-delad-ramp` → `fordonsmonterad-2-delad-ramp`
+   e.g. `/sv-fordonsramper-produkt/fordonsmonterad-3-delad-ramp` → `fordonsmonterad-3-delad-ramp`
+
+Prefer CMS **Slug** values that match catalog keys in `embed/data/variants.json`. A few live Sites slugs are aliased at build time:
+
+| CMS / URL slug | Catalog key |
+|---|---|
+| `fast-skena` | `enkelskena` |
+| `fordonsmonterade-2-delade-ramper` | `fordonsmonterad-2-delad-ramp` |
+| `teleskopisk-vikbar-skena` | `vikbar-teleskopisk-skena` |
 
 Language (first match wins):
 
